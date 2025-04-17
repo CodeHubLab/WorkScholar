@@ -1,0 +1,25 @@
+{
+  "name": "work-scholar-backend",
+  "version": "1.0.0",
+  "description": "Backend for Work Scholar application using Laravel and PostgreSQL.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "laravel/framework": "^9.0",
+    "fideloper/proxy": "^4.4",
+    "fruitcake/laravel-cors": "^2.0",
+    "laravel/tinker": "^2.5"
+  },
+  "devDependencies": {
+    "phpunit/phpunit": "^9.0"
+  },
+  "keywords": [
+    "laravel",
+    "php",
+    "postgresql"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

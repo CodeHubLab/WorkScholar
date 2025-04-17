@@ -1,0 +1,33 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ExampleController extends Controller
+{
+    public function index()
+    {
+        return response()->json(['message' => 'Welcome to the Work Scholar API!']);
+    }
+
+    public function show($id)
+    {
+        // Logic to retrieve a resource by ID
+    }
+
+    public function store(Request $request)
+    {
+        // Logic to create a new resource
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Logic to update a resource by ID
+    }
+
+    public function destroy($id)
+    {
+        // Logic to delete a resource by ID
+    }
+}
