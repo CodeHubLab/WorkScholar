@@ -378,3 +378,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 });
+
+// Add this to your existing profile.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Dropdown functionality
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+    
+    // Toggle dropdown on click
+    dropdownToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isOpen = dropdownMenu.style.opacity === '1';
+      
+      if (isOpen) {
+        dropdownMenu.style.opacity = '0';
+        dropdownMenu.style.visibility = 'hidden';
+        dropdownMenu.style.transform = 'translateY(10px)';
+        document.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
+      } else {
+        dropdownMenu.style.opacity = '1';
+        dropdownMenu.style.visibility = 'visible';
+        dropdownMenu.style.transform = 'translateY(0)';
+        document.querySelector('.dropdown-arrow').style.transform = 'rotate(180deg)';
+      }
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function() {
+      dropdownMenu.style.opacity = '0';
+      dropdownMenu.style.visibility = 'hidden';
+      dropdownMenu.style.transform = 'translateY(10px)';
+      document.querySelector('.dropdown-arrow').style.transform = 'rotate(0deg)';
+    });
+    
+    // Prevent dropdown from closing when clicking inside
+    dropdownMenu.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+  });
