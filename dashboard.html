@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>Student MS</h2>
+                <button id="close-sidebar" class="toggle-btn"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img src="D:\ws3\img\profile pic.jpg" alt="User Avatar">
+                </div>
+                <div class="user-details">
+                    <h3 id="user-name">John Doe</h3>
+                    <p id="user-role">Full-time Student</p>
+                </div>
+            </div>
+
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="D:\ws3\profile.html"><i class="fas fa-user-graduate"></i> Profile</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-book"></i> Courses</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-chart-line"></i> Grades</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fas fa-money-bill-wave"></i> Finance</a>
+                </li>
+                <!-- Additional navigation items based on user role will be inserted here via JavaScript -->
+                <li class="logout">
+                    <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="top-bar">
+                <button id="open-sidebar" class="toggle-btn"><i class="fas fa-bars"></i></button>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="top-nav">
+                    <button class="notification-btn"><i class="fas fa-bell"></i><span class="badge">3</span></button>
+                    <button class="message-btn"><i class="fas fa-envelope"></i><span class="badge">5</span></button>
+                    <div class="user-dropdown">
+                        <button class="dropdown-btn">
+                            <img src="/api/placeholder/40/40" alt="User Avatar">
+                            <span id="dropdown-username">John Doe</span>
+                        </button>
+                        <div class="dropdown-content">
+                            <a href="#"><i class="fas fa-user"></i> My Profile</a>
+                            <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                            <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="content-header">
+                    <h1 id="page-title">Dashboard</h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#">Ho3e</a></li>
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </div>
+
+                <div class="content" id="main-content">
+                    <!-- Main content will be injected here based on user role -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+    <script src="js/user-specific.js"></script>
+</body>
+</html>

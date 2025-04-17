@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Back button for mobile -->
+    <button class="back-button mobile-only">
+        <i class="fas fa-arrow-left"></i> Back
+    </button>
+
+    <div class="profile-container">
+        <header class="profile-header">
+            <div class="profile-banner">
+                <div class="avatar-container">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=6c5ce7&color=fff" alt="Student Avatar" class="avatar">
+                    <span class="status-badge">Active</span>
+                    <button class="avatar-edit-btn" id="changeAvatarBtn">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+                <h1 class="student-name">John Doe</h1>
+                <p class="student-id">ID: ST2023001</p>
+                <div class="student-meta">
+                    <span><i class="fas fa-graduation-cap"></i> Computer Science</span>
+                    <span><i class="fas fa-calendar-alt"></i> 3rd Year</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="profile-content">
+            <nav class="profile-nav">
+                <button class="nav-btn active" data-target="units">
+                    <i class="fas fa-book-open"></i>
+                    <span>Academic Units</span>
+                </button>
+                <button class="nav-btn" data-target="work">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Work History</span>
+                </button>
+                <button class="nav-btn" data-target="profile">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Personal Info</span>
+                </button>
+                <button class="nav-btn" data-target="department">
+                    <i class="fas fa-building"></i>
+                    <span>Departments</span>
+                </button>
+            </nav>
+
+            <!-- Units Section -->
+            <section id="units" class="tab-content active">
+                <div class="section-header">
+                    <h2><i class="fas fa-book-open"></i> Academic Units</h2>
+                    <button class="btn print-btn" id="printUnitsBtn">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                </div>
+                <div class="units-grid">
+                    <!-- Unit cards will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Work History Section -->
+            <section id="work" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-briefcase"></i> Work History</h2>
+                    <button class="btn add-btn" id="addWorkBtn">
+                        <i class="fas fa-plus"></i> Add
+                    </button>
+                </div>
+                <div class="work-summary">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+                <div class="work-timeline">
+                    <!-- Timeline items will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-user-cog"></i> Personal Information</h2>
+                </div>
+                <form class="profile-form" id="profileForm">
+                    <!-- Form fields will be populated by JavaScript -->
+                    <div class="form-actions">
+                        <button type="button" class="btn cancel" id="cancelEditBtn">Cancel</button>
+                        <button type="submit" class="btn save">Save Changes</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Department Section -->
+            <section id="department" class="tab-content">
+                <div class="section-header">
+                    <h2><i class="fas fa-building"></i> Department History</h2>
+                    <button class="btn add-btn" id="requestTransferBtn">
+                        <i class="fas fa-exchange-alt"></i> Request Transfer
+                    </button>
+                </div>
+                <div class="department-cards">
+                    <!-- Department cards will be populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for avatar change -->
+    <div class="modal" id="avatarModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Change Profile Picture</h3>
+            <div class="avatar-options">
+                <div class="avatar-option" data-avatar="initials">
+                    <div class="avatar-preview" style="background-color: #6c5ce7; color: white;">JD</div>
+                    <p>Initials</p>
+                </div>
+                <div class="avatar-option" data-avatar="upload">
+                    <div class="avatar-preview">
+                        <i class="fas fa-upload"></i>
+                    </div>
+                    <p>Upload Photo</p>
+                    <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            <button class="btn save" id="saveAvatarBtn">Save Changes</button>
+        </div>
+    </div>
+
+    <!-- Modal for adding work experience -->
+    <div class="modal" id="workModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Add Work Experience</h3>
+            <form id="workForm">
+                <!-- Form will be populated by JavaScript -->
+                <div class="form-actions">
+                    <button type="button" class="btn cancel">Cancel</button>
+                    <button type="submit" class="btn save">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/profile.js"></script>
+</body>
+</html>
