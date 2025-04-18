@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Courses | Work Scholar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-dark: #5649c0;
+            --secondary: #00cec9;
+            --accent: #fd79a8;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --danger: #d63031;
+            --radius: 10px;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        /* Back Button */
+        .back-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .back-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .back-button a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-button i {
+            margin-right: 5px;
+        }
+
+        /* User Dropdown */
+        .user-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: white;
+            font-size: 1rem;
+            padding: 5px 10px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .dropdown-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin: 0 8px;
+            object-fit: cover;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .dropdown-toggle.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background-color: white;
+            min-width: 200px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 10px 0;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .dropdown-toggle.active + .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: var(--primary);
+        }
+
+        .dropdown-item i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: #eee;
+            margin: 8px 0;
+        }
+
+        .logout {
+            color: var(--danger);
+        }
+
+        .logout:hover {
+            color: var(--danger);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* Filter Controls */
+        .filter-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .filter-btn:hover:not(.active) {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .search-bar {
+            position: relative;
+            flex-grow: 1;
+            max-width: 400px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        /* Courses Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .course-card {
+            background-color: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .course-image {
+            height: 160px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .course-card:hover .course-image img {
+            transform: scale(1.05);
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .course-content {
+            padding: 1.2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-category {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+            align-self: flex-start;
+        }
+
+        .course-title {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .course-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            flex-grow: 1;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 0.85rem;
+        }
+
+        .course-progress {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: #eee;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            font-size: 0.8rem;
+            color: #777;
+            text-align: right;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            flex-grow: 1;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(108, 92, 231, 0.1);
+        }
+
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+            border-radius: 50%;
+            background-color: rgba(108, 92, 231, 0.1);
+            color: var(--primary);
+        }
+
+        .btn-icon:hover {
+            background-color: rgba(108, 92, 231, 0.2);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 0;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .empty-state p {
+            color: #777;
+            max-width: 500px;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .footer-column h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .user-dropdown {
+                width: 100%;
+            }
+
+            .dropdown-toggle {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .dropdown-menu {
+                width: 100%;
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .filter-controls {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .search-bar {
+                max-width: 100%;
+            }
+
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .course-card,
+        body.dark-mode .filter-btn,
+        body.dark-mode .search-bar input {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .course-title,
+        body.dark-mode .empty-state h3 {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .course-description,
+        body.dark-mode .empty-state p,
+        body.dark-mode .progress-text {
+            color: #aaa;
+        }
+
+        body.dark-mode .filter-btn {
+            border-color: #333;
+        }
+
+        body.dark-mode .filter-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        body.dark-mode .search-bar input {
+            border-color: #333;
+            background-color: #2d2d2d;
+        }
+
+        body.dark-mode .btn-outline {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        body.dark-mode .progress-bar {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Back button for mobile -->
+            <button class="back-button mobile-only">
+                    <a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\dashboard.html">&laquo; Back</a>
+                </button>
+                
+                <a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\dashboard.html" class="logo">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Work Scholar</span>
+                </a>
+                
+                <!-- User Dropdown -->
+                <div class="user-dropdown">
+                    <button class="dropdown-toggle">
+                        <span class="username">John Doe</span>
+                        <img src="https://ui-avatars.com/api/?name=John+Doe&background=6c5ce7&color=fff" alt="User" class="dropdown-avatar">
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="dashboard.html" class="dropdown-item">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                        <a href="profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i> Profile
+                        </a>
+                        <a href="courses.html" class="dropdown-item active">
+                            <i class="fas fa-book"></i> My Courses
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="login.html" class="dropdown-item logout">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">My Courses</h1>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search courses..." id="courseSearch">
+                </div>
+            </div>
+
+            <div class="filter-controls">
+                <button class="filter-btn active" data-filter="all">All Courses</button>
+                <button class="filter-btn" data-filter="in-progress">In Progress</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+                <button class="filter-btn" data-filter="favorites">Favorites</button>
+            </div>
+
+            <div class="courses-grid" id="coursesContainer">
+                <!-- Courses will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Work Scholar</span>
+                    </div>
+                    <p>Empowering students through work-study programs and quality education.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Courses</a></li>
+                        <li><a href="#">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2023 Work Scholar Program. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sample course data
+            const courses = [
+                {
+                    id: 1,
+                    title: "Web Development Fundamentals",
+                    description: "Learn HTML, CSS, and JavaScript to build modern websites.",
+                    category: "Frontend",
+                    progress: 75,
+                    status: "in-progress",
+                    favorite: true,
+                    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1364&q=80",
+                    badge: "Popular"
+                },
+                {
+                    id: 2,
+                    title: "Database Management",
+                    description: "Master SQL and NoSQL databases for backend development.",
+                    category: "Backend",
+                    progress: 100,
+                    status: "completed",
+                    favorite: false,
+                    image: "https://images.unsplash.com/photo-1548092372-0d1bd40894a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                },
+                {
+                    id: 3,
+                    title: "React Advanced Concepts",
+                    description: "Dive deep into React hooks, context API, and performance optimization.",
+                    category: "Frontend",
+                    progress: 30,
+                    status: "in-progress",
+                    favorite: true,
+                    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                    badge: "New"
+                },
+                {
+                    id: 4,
+                    title: "Python for Data Science",
+                    description: "Learn Python programming for data analysis and visualization.",
+                    category: "Data Science",
+                    progress: 10,
+                    status: "in-progress",
+                    favorite: false,
+                    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                },
+                {
+                    id: 5,
+                    title: "UX/UI Design Principles",
+                    description: "Master the fundamentals of user experience and interface design.",
+                    category: "Design",
+                    progress: 100,
+                    status: "completed",
+                    favorite: false,
+                    image: "https://images.unsplash.com/photo-1541462608143-67571c6738dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                },
+                {
+                    id: 6,
+                    title: "DevOps Fundamentals",
+                    description: "Introduction to CI/CD pipelines, Docker, and cloud deployment.",
+                    category: "DevOps",
+                    progress: 0,
+                    status: "not-started",
+                    favorite: true,
+                    image: "https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                }
+            ];
+
+            // DOM Elements
+            const coursesContainer = document.getElementById('coursesContainer');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const searchInput = document.getElementById('courseSearch');
+
+            // Render courses
+            function renderCourses(filter = 'all', searchTerm = '') {
+                coursesContainer.innerHTML = '';
+
+                const filteredCourses = courses.filter(course => {
+                    const matchesFilter = filter === 'all' || 
+                                         (filter === 'in-progress' && course.status === 'in-progress') ||
+                                         (filter === 'completed' && course.status === 'completed') ||
+                                         (filter === 'favorites' && course.favorite);
+                    
+                    const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                                         course.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                         course.category.toLowerCase().includes(searchTerm.toLowerCase());
+                    
+                    return matchesFilter && matchesSearch;
+                });
+
+                if (filteredCourses.length === 0) {
+                    coursesContainer.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-book-open"></i>
+                            <h3>No courses found</h3>
+                            <p>We couldn't find any courses matching your criteria. Try adjusting your filters or search term.</p>
+                            <button class="btn btn-primary">Browse All Courses</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                filteredCourses.forEach(course => {
+                    const courseCard = document.createElement('div');
+                    courseCard.className = 'course-card';
+                    
+                    courseCard.innerHTML = `
+                        <div class="course-image">
+                            <img src="${course.image}" alt="${course.title}">
+                            ${course.badge ? `<span class="course-badge">${course.badge}</span>` : ''}
+                        </div>
+                        <div class="course-content">
+                            <span class="course-category">${course.category}</span>
+                            <h3 class="course-title">${course.title}</h3>
+                            <p class="course-description">${course.description}</p>
+                            
+                            ${course.progress > 0 ? `
+                            <div class="course-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${course.progress}%"></div>
+                                </div>
+                                <div class="progress-text">${course.progress}% complete</div>
+                            </div>
+                            ` : ''}
+                            
+                            <div class="course-actions">
+                                <button class="btn btn-icon favorite-btn ${course.favorite ? 'active' : ''}" data-id="${course.id}">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                <a href="course-detail.html?id=${course.id}" class="btn btn-primary">
+                                    ${course.progress > 0 ? 'Continue' : 'Start'} Course
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    coursesContainer.appendChild(courseCard);
+                });
+
+                // Add event listeners to favorite buttons
+                document.querySelectorAll('.favorite-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const courseId = parseInt(this.getAttribute('data-id'));
+                        const course = courses.find(c => c.id === courseId);
+                        course.favorite = !course.favorite;
+                        renderCourses(filter, searchTerm);
+                    });
+                });
+            }
+
+            // Initialize courses
+            renderCourses();
+
+            // Filter buttons functionality
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    const filter = this.getAttribute('data-filter');
+                    renderCourses(filter, searchInput.value.toLowerCase());
+                });
+            });
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const activeFilter = document.querySelector('.filter-btn.active');
+                const filter = activeFilter ? activeFilter.getAttribute('data-filter') : 'all';
+                renderCourses(filter, this.value.toLowerCase());
+            });
+
+            // User dropdown functionality
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
+            dropdownToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.user-dropdown')) {
+                    dropdownToggle.classList.remove('active');
+                }
+            });
+
+            // Dark mode toggle (example - would need localStorage to persist)
+            const darkModeToggle = document.createElement('button');
+            darkModeToggle.className = 'btn btn-icon';
+            darkModeToggle.style.position = 'fixed';
+            darkModeToggle.style.bottom = '20px';
+            darkModeToggle.style.right = '20px';
+            darkModeToggle.style.zIndex = '1000';
+            darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            darkModeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                const icon = this.querySelector('i');
+                if (document.body.classList.contains('dark-mode')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                    localStorage.setItem('darkMode', 'enabled');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                    localStorage.setItem('darkMode', 'disabled');
+                }
+            });
+            document.body.appendChild(darkModeToggle);
+
+            // Check for saved dark mode preference
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
+    </script>
+</body>
+</html>

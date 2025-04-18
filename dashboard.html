@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work Scholar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/profile.css">
-    <link rel="stylesheet" href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\css\dashboard.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/notifications.css">
+    <link rel="stylesheet" href="css/message.css">
+    
 </head>
 <body>
     <div class="dashboard-container">
@@ -32,10 +36,10 @@
                     <a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\profile.html"><i class="fas fa-user-graduate"></i> Profile</a>
+                    <a href="profile.html"><i class="fas fa-user-graduate"></i> Profile</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-book"></i> Courses</a>
+                    <a href="course/course.html"><i class="fas fa-book"></i> Courses</a>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-chart-line"></i> Grades</a>
@@ -54,16 +58,105 @@
         <main class="main-content">
             <header class="top-bar">
                 <button id="open-sidebar" class="toggle-btn"><i class="fas fa-bars"></i></button>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search...">
-                    <button><i class="fas fa-search"></i></button>
+                
+                <!-- Enhanced Search Bar -->
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="text" id="global-search" placeholder="Search courses, grades, documents...">
+                        <button id="search-button"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div id="search-results" class="search-results">
+                        <!-- Search results will appear here -->
+                    </div>
                 </div>
+                
                 <div class="top-nav">
-                    <button class="notification-btn"><i class="fas fa-bell"></i><span class="badge">3</span></button>
+                    <!-- Notification Dropdown -->
+                    <div class="notification-dropdown">
+                        <button class="notification-btn">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        <div class="notification-content">
+                            <div class="notification-header">
+                                <h3>Notifications</h3>
+                                <button class="mark-all-read">Mark all as read</button>
+                            </div>
+                            <div class="notification-list">
+                                <div class="notification-item unread">
+                                    <div class="notification-icon"><i class="fas fa-book"></i></div>
+                                    <div class="notification-text">
+                                        <p>New assignment posted in <strong>Advanced Programming</strong></p>
+                                        <span class="notification-time">2 hours ago</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item unread">
+                                    <div class="notification-icon"><i class="fas fa-chart-line"></i></div>
+                                    <div class="notification-text">
+                                        <p>Your grade for <strong>Math 101</strong> has been updated</p>
+                                        <span class="notification-time">Yesterday</span>
+                                    </div>
+                                </div>
+                                <div class="notification-item unread">
+                                    <div class="notification-icon"><i class="fas fa-calendar-alt"></i></div>
+                                    <div class="notification-text">
+                                        <p>Upcoming event: <strong>Career Fair</strong> next week</p>
+                                        <span class="notification-time">3 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-footer">
+                                <a href="#">View all notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Message Dropdown -->
+                    <div class="message-dropdown">
+                        <button class="message-btn">
+                            <i class="fas fa-bell"></i>
+                            <span class="message-badge">3</span>
+                        </button>
+                        <div class="notification-content">
+                            <div class="message-header">
+                                <h3>messages</h3>
+                                <button class="mark-all-read">Mark all as read</button>
+                            </div>
+                            <div class="message-list">
+                                <div class="message-item unread">
+                                    <div class="message-icon"><i class="fas fa-book"></i></div>
+                                    <div class="message-text">
+                                        <p>New assignment posted in <strong>Advanced Programming</strong></p>
+                                        <span class="message-time">2 hours ago</span>
+                                    </div>
+                                </div>
+                                <div class="message-item unread">
+                                    <div class="message-icon"><i class="fas fa-chart-line"></i></div>
+                                    <div class="message-text">
+                                        <p>Your grade for <strong>Math 101</strong> has been updated</p>
+                                        <span class="message-time">Yesterday</span>
+                                    </div>
+                                </div>
+                                <div class="message-item unread">
+                                    <div class="message-icon"><i class="fas fa-calendar-alt"></i></div>
+                                    <div class="message-text">
+                                        <p>Upcoming event: <strong>Career Fair</strong> next week</p>
+                                        <span class="message-time">3 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="message-footer">
+                                <a href="#">View all messages</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     <button class="message-btn"><i class="fas fa-envelope"></i><span class="badge">5</span></button>
                     <div class="user-dropdown">
                         <button class="dropdown-btn">
-                            <img src="/api/placeholder/40/40" alt="User Avatar">
+                            <img src="img/profile-pic.jpg" alt="User Avatar">
                             <span id="dropdown-username">John Doe</span>
                         </button>
                         <div class="dropdown-content">
@@ -78,7 +171,6 @@
             <div class="content-wrapper">
                 <div class="content-header">
                     <h1 id="page-title">Dashboard</h1>
-                    
                 </div>
 
                 <div class="content" id="main-content">
@@ -90,5 +182,8 @@
 
     <script src="js/dashboard.js"></script>
     <script src="js/user-specific.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/notifications.js"></script>
+    <script src="js/message.js"></script>
 </body>
 </html>
