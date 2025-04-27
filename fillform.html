@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Application</title>
+    <style>
+        :root {
+            --primary-color: #4a6cf7;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f8fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .profile-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .profile-btn:hover {
+            background-color: #f5f5f5;
+        }
+
+        .profile-img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #fff;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f5f5f5;
+        }
+
+        .show {
+            display: block;
+        }
+
+        /* Main Content Styles */
+        main {
+            padding: 2rem 0;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #3151c6;
+        }
+
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section h2 {
+            font-size: 1.3rem;
+            color: #555;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: "▼";
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        .file-upload {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .file-label:hover {
+            background-color: #e0e0e0;
+        }
+
+        .file-preview {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .preview-item {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: rgba(255, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .form-col {
+            flex: 1 1 300px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #3151c6;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #fff;
+            border-top: 1px solid #eee;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .footer-col {
+            flex: 1 1 250px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            text-align: center;
+            border-top: 1px solid #eee;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0.75rem 0;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Loading spinner and notification */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: 500;
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .notification.success {
+            background-color: var(--success-color);
+        }
+
+        .notification.error {
+            background-color: var(--danger-color);
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">FormApp</a>
+            <div class="profile-dropdown">
+                <button class="profile-btn" id="profileBtn">
+                    <img src="/api/placeholder/35/35" alt="Profile" class="profile-img">
+                    <span>John Doe</span>
+                </button>
+                <div class="dropdown-content" id="profileDropdown">
+                    <a href="#">My Profile</a>
+                    <a href="#">Settings</a>
+                    <a href="#">My Applications</a>
+                    <a href="#">Help</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <a href="D:\WORKSCHOLAR\login.html" class="back-btn">
+                &larr; Back to Applications
+            </a>
+            
+            <div class="form-container">
+                <h1>Application Form</h1>
+                
+                <form id="applicationForm">
+                    <!-- Personal Information Section -->
+                    <div class="form-section">
+                        <h2>Personal Information</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="firstName">First Name*</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="lastName">Last Name*</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="email">Email Address*</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="phone">Phone Number*</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="dob">Date of Birth*</label>
+                                    <input type="date" id="dob" name="dob" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="gender">Gender</label>
+                                    <div class="select-wrapper">
+                                        <select id="gender" name="gender">
+                                            <option value="">Select Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                            <option value="prefer-not-to-say">Prefer not to say</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Address Section -->
+                    <div class="form-section">
+                        <h2>Address Information</h2>
+                        
+                        <div class="form-group">
+                            <label for="address">Street Address*</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="city">City*</label>
+                                    <input type="text" id="city" name="city" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="state">State/Province*</label>
+                                    <input type="text" id="state" name="state" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="zipCode">Zip/Postal Code*</label>
+                                    <input type="text" id="zipCode" name="zipCode" required>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <div class="form-group">
+                                    <label for="country">Country*</label>
+                                    <div class="select-wrapper">
+                                        <select id="country" name="country" required>
+                                            <option value="">Select Country</option>
+                                            <option value="us">United States</option>
+                                            <option value="ca">Canada</option>
+                                            <option value="uk">United Kingdom</option>
+                                            <option value="au">Australia</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Documents Section -->
+                    <div class="form-section">
+                        <h2>Document Uploads</h2>
+                        
+                        <div class="form-group">
+                            <label>Profile Photo</label>
+                            <div class="file-upload">
+                                <input type="file" id="profilePhoto" accept="image/*" class="file-input">
+                                <label for="profilePhoto" class="file-label">Choose Photo</label>
+                                <div id="profilePhotoPreview" class="file-preview"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>ID Document* (Passport, Driver's License, etc.)</label>
+                            <div class="file-upload">
+                                <input type="file" id="idDocument" accept="image/*,.pdf" class="file-input" required>
+                                <label for="idDocument" class="file-label">Upload ID Document</label>
+                                <div id="idDocumentPreview" class="file-preview"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Supporting Documents (Multiple files allowed)</label>
+                            <div class="file-upload">
+                                <input type="file" id="supportingDocs" accept=".pdf,.doc,.docx,.jpg,.png" multiple class="file-input">
+                                <label for="supportingDocs" class="file-label">Upload Documents</label>
+                                <div id="supportingDocsPreview" class="file-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Information Section -->
+                    <div class="form-section">
+                        <h2>Additional Information</h2>
+                        
+                        <div class="form-group">
+                            <label for="comments">Comments or Special Requests</label>
+                            <textarea id="comments" name="comments" rows="4"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                                <label for="agreeTerms">I agree to the Terms and Conditions*</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <label for="newsletter">Subscribe to newsletter</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-container">
+                        <button type="button" class="btn btn-secondary" id="saveBtn">Save as Draft</button>
+                        <button type="submit" class="btn btn-primary">Submit Application</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>FormApp</h3>
+                    <p>Making form submission easy and efficient for everyone.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Help & Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support Center</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Email: info@formapp.com</li>
+                        <li>Phone: +1 (555) 123-4567</li>
+                        <li>Address: 123 Form St, Suite 100</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 FormApp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Spinner -->
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script>
+        // Profile Dropdown Toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        
+        profileBtn.addEventListener('click', function() {
+            profileDropdown.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('.profile-btn') && !event.target.matches('.profile-img')) {
+                if (profileDropdown.classList.contains('show')) {
+                    profileDropdown.classList.remove('show');
+                }
+            }
+        });
+        
+        // File Upload Preview Functionality
+        function handleFileUpload(inputId, previewId, multiple = false) {
+            const input = document.getElementById(inputId);
+            const preview = document.getElementById(previewId);
+            
+            input.addEventListener('change', function() {
+                preview.innerHTML = '';
+                
+                if (multiple) {
+                    // Handle multiple files
+                    Array.from(this.files).forEach((file, index) => {
+                        if (file.type.startsWith('image/')) {
+                            createImagePreview(file, preview, index);
+                        } else {
+                            createFilePreview(file, preview, index);
+                        }
+                    });
+                } else {
+                    // Handle single file
+                    if (this.files[0]) {
+                        if (this.files[0].type.startsWith('image/')) {
+                            createImagePreview(this.files[0], preview, 0);
+                        } else {
+                            createFilePreview(this.files[0], preview, 0);
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createImagePreview(file, container, index) {
+            const reader = new FileReader();
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+            previewItem.dataset.index = index;
+            
+            reader.onload = function(e) {
+                previewItem.innerHTML = `
+                    <img src="${e.target.result}" alt="Preview">
+                    <button type="button" class="remove-btn">&times;</button>
+                `;
+                
+                // Add remove button functionality
+                const removeBtn = previewItem.querySelector('.remove-btn');
+                removeBtn.addEventListener('click', function() {
+                    previewItem.remove();
+                });
+            };
+            
+            reader.readAsDataURL(file);
+            container.appendChild(previewItem);
+        }
+        
+        function createFilePreview(file, container, index) {
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+            previewItem.dataset.index = index;
+            
+            let fileIcon = '📄';
+            if (file.name.endsWith('.pdf')) fileIcon = '📕';
+            if (file.name.endsWith('.doc') || file.name.endsWith('.docx')) fileIcon = '📘';
+            
+            previewItem.innerHTML = `
+                <div style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column;">
+                    <div style="font-size: 2rem;">${fileIcon}</div>
+                    <div style="font-size: 0.7rem; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 90%;">${file.name}</div>
+                </div>
+                <button type="button" class="remove-btn">&times;</button>
+            `;
+            
+            // Add remove button functionality
+            const removeBtn = previewItem.querySelector('.remove-btn');
+            removeBtn.addEventListener('click', function() {
+                previewItem.remove();
+            });
+            
+            container.appendChild(previewItem);
+        }
+        
+        // Initialize file upload handlers
+        handleFileUpload('profilePhoto', 'profilePhotoPreview');
+        handleFileUpload('idDocument', 'idDocumentPreview');
+        handleFileUpload('supportingDocs', 'supportingDocsPreview', true);
+        
+        // Form Validation and Submission
+        const form = document.getElementById('applicationForm');
+        const loading = document.getElementById('loading');
+        const notification = document.getElementById('notification');
+        
+        function showNotification(message, type) {
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate form fields
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const dob = document.getElementById('dob').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const zipCode = document.getElementById('zipCode').value;
+            const country = document.getElementById('country').value;
+            const idDocument = document.getElementById('idDocument').files[0];
+            const agreeTerms = document.getElementById('agreeTerms').checked;
+            
+            // Simple validation
+            if (!firstName || !lastName || !email || !phone || !dob || !address || 
+                !city || !state || !zipCode || !country || !idDocument || !agreeTerms) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showNotification('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            // Show loading spinner
+            loading.style.display = 'flex';
+            
+            // Simulate form submission
+            setTimeout(() => {
+                loading.style.display = 'none';
+                showNotification('Application submitted successfully!', 'success');
+                form.reset();
+                
+                // Clear file previews
+                document.getElementById('profilePhotoPreview').innerHTML = '';
+                document.getElementById('idDocumentPreview').innerHTML = '';
+                document.getElementById('supportingDocsPreview').innerHTML = '';
+            }, 2000);
+        });
+        
+        // Save as Draft functionality
+        const saveBtn = document.getElementById('saveBtn');
+        
+        saveBtn.addEventListener('click', function() {
+            loading.style.display = 'flex';
+            
+            // Simulate saving draft
+            setTimeout(() => {
+                loading.style.display = 'none';
+                showNotification('Draft saved successfully!', 'success');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
