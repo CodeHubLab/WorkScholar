@@ -6,12 +6,36 @@
     <title>Student Profile</title>
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/dropdown.css">
+    <link rel="stylesheet" href="css/upload.css">
 </head>
 <body>
     <!-- Back button for mobile -->
     <button class="back-button mobile-only">
-        <i class="fas fa-arrow-left"></i> Back
+        <!--i class="fas fa-arrow-left"></i> Back -->
+        <a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\dashboard.html" > Back</a>
     </button>
+   
+    <!-- Add this inside your header, after the student-meta div -->
+<div class="user-dropdown">
+    <button class="dropdown-toggle">
+      <span class="username">John Doe</span>
+      <img src="https://ui-avatars.com/api/?name=John+Doe&background=6c5ce7&color=fff" alt="User" class="dropdown-avatar">
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="dropdown-menu">
+      <a href="dashboard.html" class="dropdown-item">
+        <i class="fas fa-user"></i> Dashboard
+      </a>
+      <a href="settings.html" class="dropdown-item">
+        <i class="fas fa-cog"></i> Settings
+      </a>
+      <div class="dropdown-divider"></div>
+      <a href="login.html" class="dropdown-item logout">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    </div>
+  </div>
 
     <div class="profile-container">
         <header class="profile-header">
@@ -120,17 +144,26 @@
                     <div class="avatar-preview" style="background-color: #6c5ce7; color: white;">JD</div>
                     <p>Initials</p>
                 </div>
-                <div class="avatar-option" data-avatar="upload">
-                    <div class="avatar-preview">
-                        <i class="fas fa-upload"></i>
+                <div class="upload-container">
+                    <div class="upload-wrapper">
+                      <input type="file" id="photoUpload" accept="image/*" class="upload-input">
+                      <label for="photoUpload" class="upload-label">
+                        <div class="upload-content">
+                          <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                          <h3 class="upload-title">Upload Profile Photo</h3>
+                          <p class="upload-subtitle">PNG or JPG (max. 5MB)</p>
+                        </div>
+                        <div class="upload-preview" id="imagePreview">
+                          <img src="" alt="Preview" class="upload-preview-image" id="previewImage">
+                          <span class="upload-preview-text">Image Preview</span>
+                        </div>
+                      </label>
+                      <div class="upload-actions">
+                        <button class="btn upload-cancel" id="cancelUpload">Cancel</button>
+                        <button class="btn upload-confirm" id="confirmUpload" disabled>Confirm</button>
+                      </div>
                     </div>
-                    <p>Upload Photo</p>
-                    <input type="file" id="avatarUpload" accept="image/*" style="display: none;">
-                </div>
-            </div>
-            <button class="btn save" id="saveAvatarBtn">Save Changes</button>
-        </div>
-    </div>
+                  </div>
 
     <!-- Modal for adding work experience -->
     <div class="modal" id="workModal">
@@ -147,6 +180,45 @@
         </div>
     </div>
 
+
     <script src="js/profile.js"></script>
+
+    <!-- Footer -->
+<footer class="profile-footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <i class="fas fa-university"></i>
+            <span>Campus Portal</span>
+        </div>
+        
+        <nav class="footer-nav">
+            <a href="#">Home</a>
+            <a href="#">Dashboard</a>
+            <a href="#">Courses</a>
+            <a href="#">Resources</a>
+            <a href="#">Help Center</a>
+        </nav>
+        
+        <div class="copyright">
+            © 2025 University Student Portal. All rights reserved.
+        </div>
+        
+        <div class="social-links">
+            <a href="#" class="social-link">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+
 </body>
 </html>

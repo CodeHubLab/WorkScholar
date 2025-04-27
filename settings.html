@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Back Button Styles */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #34495e;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-bottom: 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #2c3e50;
+            transform: translateX(-3px);
+        }
+
+        .back-button-icon {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .back-button {
+                padding: 10px 15px;
+                font-size: 0.95em;
+                position: relative;
+                z-index: 100;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .back-button {
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            }
+            
+            .back-button-text {
+                display: none;
+            }
+            
+            .back-button-icon {
+                margin-right: 0;
+            }
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            cursor: pointer;
+        }
+
+        .profile-header h1 {
+            margin-bottom: 10px;
+        }
+
+        /* Main Content Styles */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .profile-nav {
+            list-style: none;
+        }
+
+        .profile-nav li {
+            margin-bottom: 10px;
+        }
+
+        .profile-nav a {
+            display: block;
+            padding: 10px;
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .profile-nav a:hover,
+        .profile-nav a.active {
+            background-color: #e9ecef;
+            font-weight: bold;
+        }
+
+        /* Content Area Styles */
+        .content-area {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section-title {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+            color: #2c3e50;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1a252f;
+        }
+
+        /* Units Styles */
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .unit-card {
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        .unit-card.taken {
+            border-left: 4px solid #28a745;
+        }
+
+        .unit-card.not-taken {
+            border-left: 4px solid #dc3545;
+        }
+
+        .unit-card.highlighted {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+
+        /* Department Styles */
+        .department-card {
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #17a2b8;
+        }
+
+        .department-date {
+            font-size: 14px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        /* Alert Styles */
+        .alert {
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+  
+
+    <header>
+        
+        <button id="back-button" class="back-button">
+            <span class="back-button-icon"></span>
+            <span class="back-button-text">Back to Dashboard</span>
+        </button>
+        <div class="container">
+            <div class="header-content">
+                
+                <div>
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%234a69bd'/%3E%3Ccircle cx='50' cy='40' r='20' fill='%23dcdde1'/%3E%3Cpath d='M50 65 C 30 65 20 85 20 100 L 80 100 C 80 85 70 65 50 65 Z' fill='%23dcdde1'/%3E%3C/svg%3E" alt="Profile Picture" class="profile-pic" id="profile-pic">
+                    <div class="profile-header">
+                        <h1 id="student-name">Emma Johnson</h1>
+                        <p>Student ID: <span id="student-id">ST1234567</span></p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="profile-grid">
+            <div class="sidebar">
+                <ul class="profile-nav">
+                    <li><a href="#profile" class="tab-link active" data-tab="profile">Profile Information</a></li>
+                    <li><a href="#units" class="tab-link" data-tab="units">Academic Units</a></li>
+                    <li><a href="#work" class="tab-link" data-tab="work">Work Experience</a></li>
+                    <li><a href="#department" class="tab-link" data-tab="department">Department History</a></li>
+                </ul>
+            </div>
+
+            <div class="content-area">
+                <!-- Profile Tab -->
+                <div id="profile" class="tab-content active">
+                    <h2 class="section-title">Profile Information</h2>
+                    <div class="alert alert-success" id="profile-success">Profile updated successfully!</div>
+                    
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" class="form-control" id="full-name" value="Emma Johnson">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" id="email" value="emma.johnson@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" value="(555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" class="form-control" id="dob" value="1998-05-15">
+                        </div>
+                        <button type="button" class="btn" id="change-password-btn">Change Password</button>
+                        <button type="button" class="btn" id="save-profile-btn">Save Changes</button>
+                    </form>
+                </div>
+
+                <!-- Units Tab -->
+                <div id="units" class="tab-content">
+                    <h2 class="section-title">Academic Units</h2>
+                    <div class="units-grid">
+                        <div class="unit-card taken">
+                            <h3>CS101</h3>
+                            <p>Introduction to Programming</p>
+                            <p>Grade: A</p>
+                        </div>
+                        <div class="unit-card taken">
+                            <h3>CS102</h3>
+                            <p>Data Structures</p>
+                            <p>Grade: A-</p>
+                        </div>
+                        <div class="unit-card highlighted">
+                            <h3>CS201</h3>
+                            <p>Database Systems</p>
+                            <p>Currently Enrolled</p>
+                        </div>
+                        <div class="unit-card not-taken">
+                            <h3>CS301</h3>
+                            <p>Artificial Intelligence</p>
+                            <p>Not Taken</p>
+                        </div>
+                        <div class="unit-card taken">
+                            <h3>MATH101</h3>
+                            <p>Calculus I</p>
+                            <p>Grade: B+</p>
+                        </div>
+                        <div class="unit-card taken">
+                            <h3>MATH102</h3>
+                            <p>Calculus II</p>
+                            <p>Grade: B</p>
+                        </div>
+                        <div class="unit-card not-taken">
+                            <h3>CS401</h3>
+                            <p>Advanced Network Security</p>
+                            <p>Not Taken</p>
+                        </div>
+                        <div class="unit-card highlighted">
+                            <h3>CS250</h3>
+                            <p>Web Development</p>
+                            <p>Currently Enrolled</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Experience Tab -->
+                <div id="work" class="tab-content">
+                    <h2 class="section-title">Work Experience</h2>
+                    <div class="work-experience">
+                        <h3>Total Work Experience: <span id="total-years">2 years, 3 months</span></h3>
+                        <p>Started working on: <span id="work-start-date">January 15, 2023</span></p>
+                        <p>Current position since: <span id="current-position-date">March 10, 2024</span></p>
+                        
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label for="start-date">Update Work Start Date</label>
+                            <input type="date" class="form-control" id="start-date" value="2023-01-15">
+                        </div>
+                        <button type="button" class="btn" id="calculate-work-years">Recalculate Experience</button>
+                    </div>
+                </div>
+
+                <!-- Department Tab -->
+                <div id="department" class="tab-content">
+                    <h2 class="section-title">Department History</h2>
+                    
+                    <div class="department-card">
+                        <h3>Computer Science Research Lab</h3>
+                        <p class="department-date">March 10, 2024 - Present</p>
+                        <p>Research Assistant</p>
+                    </div>
+                    
+                    <div class="department-card">
+                        <h3>IT Support Department</h3>
+                        <p class="department-date">January 15, 2023 - March 9, 2024</p>
+                        <p>Technical Support Specialist</p>
+                    </div>
+                    
+                    <button type="button" class="btn" id="add-department-btn">Add New Department</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Change Modal -->
+    <div id="password-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Change Password</h2>
+                <span class="close" id="close-password-modal">&times;</span>
+            </div>
+            <div class="alert alert-danger" id="password-error">Passwords don't match!</div>
+            <form id="password-form">
+                <div class="form-group">
+                    <label for="current-password">Current Password</label>
+                    <input type="password" class="form-control" id="current-password">
+                </div>
+                <div class="form-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" class="form-control" id="new-password">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm New Password</label>
+                    <input type="password" class="form-control" id="confirm-password">
+                </div>
+                <button type="button" class="btn" id="update-password-btn">Update Password</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Department Modal -->
+    <div id="department-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Department</h2>
+                <span class="close" id="close-department-modal">&times;</span>
+            </div>
+            <form id="department-form">
+                <div class="form-group">
+                    <label for="department-name">Department Name</label>
+                    <input type="text" class="form-control" id="department-name">
+                </div>
+                <div class="form-group">
+                    <label for="department-role">Your Role</label>
+                    <input type="text" class="form-control" id="department-role">
+                </div>
+                <div class="form-group">
+                    <label for="department-start">Start Date</label>
+                    <input type="date" class="form-control" id="department-start">
+                </div>
+                <div class="form-group">
+                    <label for="department-end">End Date (leave blank if current)</label>
+                    <input type="date" class="form-control" id="department-end">
+                </div>
+                <button type="button" class="btn" id="save-department-btn">Add Department</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Picture Modal -->
+    <div id="profile-pic-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Update Profile Picture</h2>
+                <span class="close" id="close-pic-modal">&times;</span>
+            </div>
+            <form id="pic-form">
+                <div class="form-group">
+                    <label for="profile-pic-upload">Upload new profile picture</label>
+                    <input type="file" class="form-control" id="profile-pic-upload" accept="image/*">
+                </div>
+                <button type="button" class="btn" id="save-pic-btn">Update Picture</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Back Navigation Confirmation Modal -->
+    <div id="back-confirm-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirm Navigation</h2>
+                <span class="close" id="close-back-confirm-modal">&times;</span>
+            </div>
+            <p>You have unsaved changes. Are you sure you want to go back?</p>
+            <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                <button type="button" class="btn" id="stay-btn" style="background-color: #6c757d;">Stay on Page</button>
+                <button type="button" class="btn" id="leave-btn">Leave Page</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Back Button Functionality
+        const backButton = document.getElementById('back-button');
+        const backConfirmModal = document.getElementById('back-confirm-modal');
+        const closeBackConfirmModal = document.getElementById('close-back-confirm-modal');
+        const stayBtn = document.getElementById('stay-btn');
+        const leaveBtn = document.getElementById('leave-btn');
+        
+        // Form change detection
+        let hasChanges = false;
+        
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('input', function() {
+                hasChanges = true;
+            });
+        });
+        
+        // Reset change detection when forms are saved
+        document.getElementById('save-profile-btn').addEventListener('click', function() {
+            hasChanges = false;
+        });
+        
+        // Handle back button click
+        backButton.addEventListener('click', function() {
+            if (hasChanges) {
+                // Show confirmation modal if there are unsaved changes
+                backConfirmModal.style.display = 'block';
+            } else {
+                // If no changes, go back directly
+                goBack();
+            }
+        });
+        
+        // Back confirmation modal handlers
+        closeBackConfirmModal.addEventListener('click', function() {
+            backConfirmModal.style.display = 'none';
+        });
+        
+        stayBtn.addEventListener('click', function() {
+            backConfirmModal.style.display = 'none';
+        });
+        
+        leaveBtn.addEventListener('click', function() {
+            hasChanges = false;
+            backConfirmModal.style.display = 'none';
+            goBack();
+        });
+        
+        // Function to navigate back
+        function goBack() {
+            // In a real application, you'd navigate to the previous page
+            // For demo purposes, let's simulate navigation
+            alert('Navigating back to dashboard...');
+            // In a real application, you would use:
+            // window.location.href = 'dashboard.html';
+            // or
+            // history.back();
+        }
+
+        // Tab Navigation
+        document.querySelectorAll('.tab-link').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.tab-link').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Change Password Modal
+        const passwordModal = document.getElementById('password-modal');
+        const changePasswordBtn = document.getElementById('change-password-btn');
+        const closePasswordModal = document.getElementById('close-password-modal');
+        const updatePasswordBtn = document.getElementById('update-password-btn');
+        const passwordError = document.getElementById('password-error');
+
+        changePasswordBtn.addEventListener('click', function() {
+            passwordModal.style.display = 'block';
+        });
+
+        closePasswordModal.addEventListener('click', function() {
+            passwordModal.style.display = 'none';
+            // Reset form
+            document.getElementById('password-form').reset();
+            passwordError.style.display = 'none';
+        });
+
+        updatePasswordBtn.addEventListener('click', function() {
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (newPassword !== confirmPassword) {
+                passwordError.style.display = 'block';
+                return;
+            }
+            
+            // Simulate password update
+            passwordError.style.display = 'none';
+            alert('Password updated successfully!');
+            passwordModal.style.display = 'none';
+            document.getElementById('password-form').reset();
+        });
+
+        // Save Profile Changes
+        const saveProfileBtn = document.getElementById('save-profile-btn');
+        const profileSuccess = document.getElementById('profile-success');
+
+        saveProfileBtn.addEventListener('click', function() {
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            
+            // Update displayed name
+            document.getElementById('student-name').textContent = fullName;
+            
+            // Show success message
+            profileSuccess.style.display = 'block';
+            setTimeout(() => {
+                profileSuccess.style.display = 'none';
+            }, 3000);
+        });
+
+        // Work Experience Calculator
+        const calculateWorkYears = document.getElementById('calculate-work-years');
+        
+        calculateWorkYears.addEventListener('click', function() {
+            const startDate = new Date(document.getElementById('start-date').value);
+            const currentDate = new Date();
+            
+            // Calculate difference in years and months
+            let years = currentDate.getFullYear() - startDate.getFullYear();
+            let months = currentDate.getMonth() - startDate.getMonth();
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            // Update display
+            document.getElementById('total-years').textContent = `${years} years, ${months} months`;
+            document.getElementById('work-start-date').textContent = startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        });
+
+        // Department Modal
+        const departmentModal = document.getElementById('department-modal');
+        const addDepartmentBtn = document.getElementById('add-department-btn');
+        const closeDepartmentModal = document.getElementById('close-department-modal');
+        const saveDepartmentBtn = document.getElementById('save-department-btn');
+
+        addDepartmentBtn.addEventListener('click', function() {
+            departmentModal.style.display = 'block';
+        });
+
+        closeDepartmentModal.addEventListener('click', function() {
+            departmentModal.style.display = 'none';
+            document.getElementById('department-form').reset();
+        });
+
+        saveDepartmentBtn.addEventListener('click', function() {
+            const name = document.getElementById('department-name').value;
+            const role = document.getElementById('department-role').value;
+            const startDate = new Date(document.getElementById('department-start').value);
+            const endDateInput = document.getElementById('department-end').value;
+            
+            if (!name || !role || !startDate) {
+                alert('Please fill all required fields');
+                return;
+            }
+            
+            // Create new department card
+            const departmentCard = document.createElement('div');
+            departmentCard.className = 'department-card';
+            
+            const departmentName = document.createElement('h3');
+            departmentName.textContent = name;
+            
+            const departmentDate = document.createElement('p');
+            departmentDate.className = 'department-date';
+            
+            const formattedStart = startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            
+            if (endDateInput) {
+                const endDate = new Date(endDateInput);
+                const formattedEnd = endDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                departmentDate.textContent = `${formattedStart} - ${formattedEnd}`;
+            } else {
+                departmentDate.textContent = `${formattedStart} - Present`;
+            }
+            
+            const departmentRole = document.createElement('p');
+            departmentRole.textContent = role;
+            
+            departmentCard.appendChild(departmentName);
+            departmentCard.appendChild(departmentDate);
+            departmentCard.appendChild(departmentRole);
+            
+            // Add to the top of the department list
+            const departmentContainer = document.getElementById('department');
+            departmentContainer.insertBefore(departmentCard, departmentContainer.querySelector('.department-card'));
+            
+            // Close modal and reset form
+            departmentModal.style.display = 'none';
+            document.getElementById('department-form').reset();
+        });
+
+        // Profile Picture Modal
+        const profilePicModal = document.getElementById('profile-pic-modal');
+        const profilePic = document.getElementById('profile-pic');
+        const closePicModal = document.getElementById('close-pic-modal');
+        const savePicBtn = document.getElementById('save-pic-btn');
+
+        profilePic.addEventListener('click', function() {
+            profilePicModal.style.display = 'block';
+        });
+
+        closePicModal.addEventListener('click', function() {
+            profilePicModal.style.display = 'none';
+            document.getElementById('pic-form').reset();
+        });
+
+        savePicBtn.addEventListener('click', function() {
+            const fileInput = document.getElementById('profile-pic-upload');
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    profilePic.src = e.target.result;
+                };
+                
+                reader.readAsDataURL(fileInput.files[0]);
+                profilePicModal.style.display = 'none';
+            } else {
+                alert('Please select an image file');
+            }
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === passwordModal) {
+                passwordModal.style.display = 'none';
+                document.getElementById('password-form').reset();
+                passwordError.style.display = 'none';
+            }
+            if (event.target === departmentModal) {
+                departmentModal.style.display = 'none';
+                document.getElementById('department-form').reset();
+            }
+            if (event.target === profilePicModal) {
+                profilePicModal.style.display = 'none';
+                document.getElementById('pic-form').reset();
+            }
+            if (event.target === backConfirmModal) {
+                backConfirmModal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
