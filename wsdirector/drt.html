@@ -641,9 +641,9 @@
                 <div class="dropdown">
                     <i class="fas fa-chevron-down"></i>
                     <div class="dropdown-content">
-                        <a href="#"><i class="fas fa-user"></i> Profile</a>
-                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
-                        <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a href="#" id="profile-link"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#" id="settings-menu-link"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#" id="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
                     </div>
                 </div>
             </div>
@@ -809,7 +809,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span>Current Work Scholars</span>
                         <div>
-                            <input type="text" class="form-control" placeholder="Search..." style="display: inline-block; width: 200px;">
+                            <input type="text" class="form-control" id="scholar-search" placeholder="Search..." style="display: inline-block; width: 200px;">
                         </div>
                     </div>
                 </div>
@@ -827,7 +827,7 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="scholars-table">
                                 <tr>
                                     <td>WS-2023-001</td>
                                     <td>John Doe</td>
@@ -836,9 +836,9 @@
                                     <td>20</td>
                                     <td><span class="status status-approved">Active</span></td>
                                     <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                        <span class="action-icon edit"><i class="fas fa-edit"></i></span>
-                                        <span class="action-icon delete"><i class="fas fa-trash"></i></span>
+                                        <span class="action-icon view" data-id="WS-2023-001"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="WS-2023-001"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="WS-2023-001"><i class="fas fa-trash"></i></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -849,9 +849,9 @@
                                     <td>15</td>
                                     <td><span class="status status-approved">Active</span></td>
                                     <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                        <span class="action-icon edit"><i class="fas fa-edit"></i></span>
-                                        <span class="action-icon delete"><i class="fas fa-trash"></i></span>
+                                        <span class="action-icon view" data-id="WS-2023-002"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="WS-2023-002"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="WS-2023-002"><i class="fas fa-trash"></i></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -862,9 +862,9 @@
                                     <td>10</td>
                                     <td><span class="status status-warning">Probation</span></td>
                                     <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                        <span class="action-icon edit"><i class="fas fa-edit"></i></span>
-                                        <span class="action-icon delete"><i class="fas fa-trash"></i></span>
+                                        <span class="action-icon view" data-id="WS-2023-003"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="WS-2023-003"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="WS-2023-003"><i class="fas fa-trash"></i></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -875,9 +875,9 @@
                                     <td>20</td>
                                     <td><span class="status status-approved">Active</span></td>
                                     <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                        <span class="action-icon edit"><i class="fas fa-edit"></i></span>
-                                        <span class="action-icon delete"><i class="fas fa-trash"></i></span>
+                                        <span class="action-icon view" data-id="WS-2023-004"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="WS-2023-004"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="WS-2023-004"><i class="fas fa-trash"></i></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -888,9 +888,9 @@
                                     <td>15</td>
                                     <td><span class="status status-approved">Active</span></td>
                                     <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                        <span class="action-icon edit"><i class="fas fa-edit"></i></span>
-                                        <span class="action-icon delete"><i class="fas fa-trash"></i></span>
+                                        <span class="action-icon view" data-id="WS-2023-005"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="WS-2023-005"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="WS-2023-005"><i class="fas fa-trash"></i></span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -911,7 +911,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span>Pending Applications</span>
                         <div>
-                            <input type="text" class="form-control" placeholder="Search..." style="display: inline-block; width: 200px;">
+                            <input type="text" class="form-control" id="application-search" placeholder="Search..." style="display: inline-block; width: 200px;">
                         </div>
                     </div>
                 </div>
@@ -929,7 +929,7 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="applications-table">
                                 <tr>
                                     <td>APP-2023-001</td>
                                     <td>James Wilson</td>
@@ -938,9 +938,9 @@
                                     <td>Apr 18, 2025</td>
                                     <td><span class="status status-pending">Pending</span></td>
                                     <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                        <span class="action-icon edit"><i class="fas fa-check-circle"></i></span>
-                                        <span class="action-icon delete"><i class="fas fa-times-circle"></i></span>
+                                        <span class="action-icon view" data-id="APP-2023-001"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon approve" data-id="APP-2023-001"><i class="fas fa-check-circle"></i></span>
+                                        <span class="action-icon reject" data-id="APP-2023-001"><i class="fas fa-times-circle"></i></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -949,116 +949,63 @@
                                     <td>Engineering</td>
                                     <td>15</td>
                                     <td>Apr 17, 2025</td>
-                                    <td><span class="status status-approved">Approved</span></td>
+                                    <td><span class="status status-pending">Pending</span></td>
+
                                     <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon view" data-id="APP-2023-002"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon approve" data-id="APP-2023-002"><i class="fas fa-check-circle"></i></span>
+                                        <span class="action-icon reject" data-id="APP-2023-002"><i class="fas fa-times-circle"></i></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>APP-2023-003</td>
-                                    <td>Alex Johnson</td>
+                                    <td>Emily Johnson</td>
                                     <td>Biology</td>
                                     <td>10</td>
-                                    <td>Apr 17, 2025</td>
+                                    <td>Apr 16, 2025</td>
                                     <td><span class="status status-pending">Pending</span></td>
                                     <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                        <span class="action-icon edit"><i class="fas fa-check-circle"></i></span>
-                                        <span class="action-icon delete"><i class="fas fa-times-circle"></i></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>APP-2023-004</td>
-                                    <td>Emily Johnson</td>
-                                    <td>Physics</td>
-                                    <td>20</td>
-                                    <td>Apr 16, 2025</td>
-                                    <td><span class="status status-rejected">Rejected</span></td>
-                                    <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon view" data-id="APP-2023-003"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon approve" data-id="APP-2023-003"><i class="fas fa-check-circle"></i></span>
+                                        <span class="action-icon reject" data-id="APP-2023-003"><i class="fas fa-times-circle"></i></span>
                                     </td>
                                 </tr>   
                                 <tr>
-                                    <td>APP-2023-005</td>
+                                    <td>APP-2023-004</td>
                                     <td>Miguel Santos</td>
                                     <td>Mathematics</td>
-                                    <td>15</td>
-                                    <td>Apr 16, 2025</td>
-                                    <td><span class="status status-approved">Approved</span></td>
-                                    <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                    </td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>APP-2023-006</td>
-                                    <td>Lisa Okafor</td>
-                                    <td>Chemistry</td>
                                     <td>20</td>
                                     <td>Apr 15, 2025</td>
                                     <td><span class="status status-pending">Pending</span></td>
                                     <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                        <span class="action-icon edit"><i class="fas fa-check-circle"></i></span>
-                                        <span class="action-icon delete"><i class="fas fa-times-circle"></i></span>
+                                        <span class="action-icon view" data-id="APP-2023-004"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon approve" data-id="APP-2023-004"><i class="fas fa-check-circle"></i></span>
+                                        <span class="action-icon reject" data-id="APP-2023-004"><i class="fas fa-times-circle"></i></span>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>APP-2023-007</td>
-                                    <td>John Doe</td>
-                                    <td>Computer Science</td>
-                                    <td>20</td>
-                                    <td>Apr 14, 2025</td>
-                                    <td><span class="status status-approved">Approved</span></td>
-                                    <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                    </td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>APP-2023-008</td>
-                                    <td>Jane Smith</td>
-                                    <td>Biology</td>
+                                    <td>APP-2023-005</td>
+                                    <td>Lisa Okafor</td>
+                                    <td>Chemistry</td>
                                     <td>15</td>
                                     <td>Apr 14, 2025</td>
                                     <td><span class="status status-pending">Pending</span></td>
                                     <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                        <span class="action-icon edit"><i class="fas fa-check-circle"></i></span>
-                                        <span class="action-icon delete"><i class="fas fa-times-circle"></i></span>
-                                    </td>
-                                </tr>   
-                                <tr>
-                                    <td>APP-2023-009</td>
-                                    <td>Emily Johnson</td>
-                                    <td>Physics</td>
-                                    <td>20</td>
-                                    <td>Apr 13, 2025</td>
-                                    <td><span class="status status-rejected">Rejected</span></td>
-                                    <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                    </td>
-                                    </td>   
-                                </tr>
-                                <tr>
-                                    <td>APP-2023-010</td>
-                                    <td>Miguel Santos</td>
-                                    <td>Mathematics</td>
-                                    <td>15</td>
-                                    <td>Apr 13, 2025</td>
-                                    <td><span class="status status-approved">Approved</span></td>
-                                    <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                    </td>   
+                                        <span class="action-icon view" data-id="APP-2023-005"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon approve" data-id="APP-2023-005"><i class="fas fa-check-circle"></i></span>
+                                        <span class="action-icon reject" data-id="APP-2023-005"><i class="fas fa-times-circle"></i></span>
                                     </td>
                                 </tr>
-                            </tbody>    
+                            </tbody>
                         </table>
-                    </div>      
+                    </div>
+
                 </div>
             </div>
         </div>
         <!-- Re-Applications View -->
+
+
         <div id="reapplications-view" style="display: none;">
             <div class="content-header">
                 <h1>Re-Applications</h1>
@@ -1069,7 +1016,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span>Pending Re-Applications</span>
                         <div>
-                            <input type="text" class="form-control" placeholder="Search..." style="display: inline-block; width: 200px;">
+                            <input type="text" class="form-control" id="reapplication-search" placeholder="Search..." style="display: inline-block; width: 200px;">
                         </div>
                     </div>
                 </div>
@@ -1087,8 +1034,7 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <!-- Sample Data -->
+                            <tbody id="reapplications-table">
                                 <tr>
                                     <td>REAPP-2023-001</td>
                                     <td>James Wilson</td>
@@ -1097,10 +1043,10 @@
                                     <td>Apr 18, 2025</td>
                                     <td><span class="status status-pending">Pending</span></td>
                                     <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
-                                        <span class="action-icon edit"><i class="fas fa-check-circle"></i></span>
-                                        <span class="action-icon delete"><i class="fas fa-times-circle"></i></span>
-                                    </td>   
+                                        <span class="action-icon view" data-id="REAPP-2023-001"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon approve" data-id="REAPP-2023-001"><i class="fas fa-check-circle"></i></span>
+                                        <span class="action-icon reject" data-id="REAPP-2023-001"><i class="fas fa-times-circle"></i></span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>REAPP-2023-002</td>
@@ -1108,8 +1054,351 @@
                                     <td>Engineering</td>
                                     <td>15</td>
                                     <td>Apr 17, 2025</td>
-                                    <td><span class="status status-approved">Approved</span></td>
+                                    <td><span class="status status-pending">Pending</span></td>
                                     <td class="actions">
-                                        <span class="action-icon view"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon view" data-id="REAPP-2023-002"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon approve" data-id="REAPP-2023-002"><i class="fas fa-check-circle"></i></span>
+                                        <span class="action-icon reject" data-id="REAPP-2023-002"><i class="fas fa-times-circle"></i></span>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>REAPP-2023-003</td>
+                                    <td>Emily Johnson</td>
+                                    <td>Biology</td>
+                                    <td>10</td>
+                                    <td>Apr 16, 2025</td>
+                                    <td><span class="status status-pending">Pending</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="REAPP-2023-003"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon approve" data-id="REAPP-2023-003"><i class="fas fa-check-circle"></i></span>
+                                        <span class="action-icon reject" data-id="REAPP-2023-003"><i class="fas fa-times-circle"></i></span>
+                                    </td>
+                                </tr>   
+                                <tr>
+                                    <td>REAPP-2023-004</td>
+                                    <td>Miguel Santos</td>
+                                    <td>Mathematics</td>
+                                    <td>20</td>
+                                    <td>Apr 15, 2025</td>
+                                    <td><span class="status status-pending">Pending</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="REAPP-2023-004"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon approve" data-id="REAPP-2023-004"><i class="fas fa-check-circle"></i></span>
+                                        <span class="action-icon reject" data-id="REAPP-2023-004"><i class="fas fa-times-circle"></i></span>
+                                    </td>
+                                </tr>   
+                                <tr>
+                                    <td>REAPP-2023-005</td>
+                                    <td>Lisa Okafor</td>
+                                    <td>Chemistry</td>
+                                    <td>15</td>
+                                    <td>Apr 14, 2025</td>
+                                    <td><span class="status status-pending">Pending</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="REAPP-2023-005"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon approve" data-id="REAPP-2023-005"><i class="fas fa-check-circle"></i></span>
+                                        <span class="action-icon reject" data-id="REAPP-2023-005"><i class="fas fa-times-circle"></i></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Attendance Monitoring View -->
+        <div id="attendance-view" style="display: none;">
+            <div class="content-header">
+                <h1>DTR Monitoring</h1>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span>Attendance Records</span>
+                        <div>
+                            <input type="text" class="form-control" id="attendance-search" placeholder="Search..." style="display: inline-block; width: 200px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Check-in Time</th>
+                                    <th>Check-out Time</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendance-table">
+                                <tr>
+                                    <td>AT-2023-001</td>
+                                    <td>John Doe</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-001"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-001"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-001"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>AT-2023-002</td>
+                                    <td>Jane Smith</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:15 AM</td>
+                                    <td>05:15 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-002"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-002"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-002"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-003</td>
+                                    <td>Emily Johnson</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:30 AM</td>
+                                    <td>05:30 PM</td>
+                                    <td><span class="status status-warning">Late</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-003"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-003"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-003"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-004</td>
+                                    <td>Miguel Santos</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-004"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-004"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-004"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-005</td>
+                                    <td>Lisa Okafor</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-005"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-005"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-005"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-006</td>
+                                    <td>James Wilson</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-006"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-006"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-006"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-007</td>
+                                    <td>Sofia Chen</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-007"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-007"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-007"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-008</td>
+                                    <td>Lisa Okafor</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-008"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-008"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-008"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-009</td>
+                                    <td>Emily Johnson</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-009"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-009"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-009"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-010</td>
+                                    <td>Miguel Santos</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-010"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-010"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-010"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-011</td>
+                                    <td>James Wilson</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-011"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-011"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-011"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-012</td>
+                                    <td>Sofia Chen</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-012"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-012"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-012"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-013</td>
+                                    <td>Lisa Okafor</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-013"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-013"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-013"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-014</td>
+                                    <td>Emily Johnson</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-014"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-014"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-014"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-015</td>
+                                    <td>Miguel Santos</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-015"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-015"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-015"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-016</td>
+                                    <td>James Wilson</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-016"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-016"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-016"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-017</td>
+                                    <td>Sofia Chen</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-017"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-017"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-017"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-018</td>
+                                    <td>Lisa Okafor</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-018"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-018"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-018"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-019</td>
+                                    <td>Emily Johnson</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-019"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-019"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-019"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>AT-2023-020</td>
+                                    <td>Miguel Santos</td>
+                                    <td>Apr 18, 2025</td>
+                                    <td>08:00 AM</td>
+                                    <td>05:00 PM</td>
+                                    <td><span class="status status-approved">Present</span></td>
+                                    <td class="actions">
+                                        <span class="action-icon view" data-id="AT-2023-020"><i class="fas fa-eye"></i></span>
+                                        <span class="action-icon edit" data-id="AT-2023-020"><i class="fas fa-edit"></i></span>
+                                        <span class="action-icon delete" data-id="AT-2023-020"><i class="fas fa-trash"></i></span>
+                                    </td>
+                                    
+
+
+
+
+
