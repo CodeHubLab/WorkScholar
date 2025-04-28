@@ -145,12 +145,22 @@
             <p>Access your student work portal</p>
         </div>
         
-        <form id="login-form">
+        <form id="login-form" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="error-message" {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
             <div class="user-type">
                 <label for="user-role">Login As:</label>
                 <select id="user-role" name="user-role">
-                   <!-- <option value="student-fulltime">Full-time Student</option -->
-                    <option value="student-working">Working Student</option>
+                    <option value="student_working">Working Student</option>
                     <option value="supervisor">Work Supervisor</option>
                     <option value="director">Working Student Director</option>
                     <option value="admin">Administrator</option>
@@ -170,112 +180,25 @@
             <button type="submit" class="login-btn">Login</button>
             
             <div class="forgot-password">
-                <a href="D:\WORKSCHOLAR\forgotpass.html">Forgot Password?</a>
+                <a href="{% url 'password_reset' %}">Forgot Password?</a>
             </div>
         </form>
     </div>
 
     <script>
-        // Form submission handler
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const userRole = document.getElementById('user-role').value;
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            // Form validation
-            if (!username.trim()) {
-                showError('username', 'Please enter your username or ID number');
-                return;
-            }
-            
-            if (!password.trim()) {
-                showError('password', 'Please enter your password');
-                return;
-            }
-            
-            // In a real application, you would send these credentials to a server
-            // For demo purposes, we'll redirect based on user role
-            switch(userRole) {
-                case 'student-fulltime':
-                    window.location.href = 'fulltime-dashboard.html';
-                    break;
-                case 'student-working':
-                    window.location.href = 'working-dashboard.html';
-                    break;
-                case 'supervisor':
-                    window.location.href = 'supervisor-dashboard.html';
-                    break;
-                case 'director':
-                    window.location.href = 'director-dashboard.html';
-                    break;
-                case 'admin':
-                    window.location.href = 'admin-dashboard.html';
-                    break;
-                default:
-                    alert('Invalid user role');
+        // Remove the JavaScript form handling since we're using Django's authentication now
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show error messages for 3 seconds then fade out
+            const messages = document.querySelectorAll('.messages .error-message');
+            if (messages.length > 0) {
+                setTimeout(() => {
+                    messages.forEach(msg => {
+                        msg.style.opacity = '0';
+                        setTimeout(() => msg.remove(), 300);
+                    });
+                }, 3000);
             }
         });
-        
-        // Form validation helper
-        function showError(inputId, message) {
-            const input = document.getElementById(inputId);
-            const existingError = input.parentElement.querySelector('.error-message');
-            
-            // Remove existing error if any
-            if (existingError) {
-                existingError.remove();
-            }
-            
-            // Create and add error message
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'error-message';
-            errorDiv.style.color = '#ff3860';
-            errorDiv.style.fontSize = '14px';
-            errorDiv.style.marginTop = '5px';
-            errorDiv.textContent = message;
-            
-            input.parentElement.appendChild(errorDiv);
-            
-            // Highlight input
-            input.style.borderColor = '#ff3860';
-            
-            // Reset after 3 seconds
-            setTimeout(() => {
-                errorDiv.remove();
-                input.style.borderColor = '';
-            }, 3000);
-        }
-        
-        // Footer toggle functionality for mobile
-        document.getElementById('footerToggle').addEventListener('click', function() {
-            const footer = document.getElementById('siteFooter');
-            
-            if (footer.classList.contains('footer-collapsed')) {
-                footer.classList.remove('footer-collapsed');
-                footer.classList.add('footer-expanded');
-            } else {
-                footer.classList.remove('footer-expanded');
-                footer.classList.add('footer-collapsed');
-            }
-        });
-        
-        // Automatically set footer state based on screen size
-        function setInitialFooterState() {
-            const footer = document.getElementById('siteFooter');
-            if (window.innerWidth <= 768) {
-                footer.classList.add('footer-collapsed');
-                footer.classList.remove('footer-expanded');
-            } else {
-                footer.classList.remove('footer-collapsed');
-                footer.classList.add('footer-expanded');
-            }
-        }
-        
-        // Run on page load and resize
-        setInitialFooterState();
-        window.addEventListener('resize', setInitialFooterState);
     </script>
 </body>
 </html>
