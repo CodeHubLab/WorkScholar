@@ -25,7 +25,12 @@
         }
         
         body {
+            {% if login_background %}
+            background: url('{{ login_background.image.url }}') no-repeat center center fixed;
+            background-size: cover;
+            {% else %}
             background: linear-gradient(135deg, #667eea, #764ba2);
+            {% endif %}
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -712,7 +717,7 @@
             
             <div class="footer-content">
                 <div class="footer-section brand">
-                    <h3>Work Scholar</h3>
+                    <h3>Gay Scholar</h3>
                     <p>Empowering students through educational work opportunities.</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-instagram"></i></a>

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add New User - Work Scholar{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+<style>
+    .form-container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 20px auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #2c3e50;
+        font-weight: 500;
+    }
+
+    .form-group input, .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    .form-group select {
+        background-color: white;
+    }
+
+    .submit-btn {
+        background: var(--primary);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        width: 100%;
+    }
+
+    .submit-btn:hover {
+        background: var(--primary-light);
+    }
+
+    .error-message {
+        color: #e74c3c;
+        margin-top: 5px;
+        font-size: 0.9rem;
+    }
+
+    .success-message {
+        color: #2ecc71;
+        margin-bottom: 20px;
+        padding: 10px;
+        background: #f0fff0;
+        border-radius: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2 style="margin-bottom: 30px; color: #2c3e50;">Add New User</h2>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="{% if message.tags == 'success' %}success-message{% else %}error-message{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" action="{% url 'add_user' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="id_number">Student ID Number</label>
+            <input type="text" id="id_number" name="id_number" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="user_type">User Type</label>
+            <select id="user_type" name="user_type" required>
+                <option value="student_working">Work Scholar</option>
+                <option value="supervisor">Supervisor</option>
+                <option value="director">Director</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+
+        <button type="submit" class="submit-btn">Create User</button>
+    </form>
+</div>
+{% endblock %}

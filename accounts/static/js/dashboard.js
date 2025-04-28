@@ -67,6 +67,246 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load dynamic content based on current page
     loadPageContent();
+
+    // Message auto-dismiss
+    const messages = document.querySelectorAll('.message');
+    messages.forEach(message => {
+        setTimeout(() => {
+            message.style.transform = 'translateX(100%)';
+            message.style.opacity = '0';
+            setTimeout(() => message.remove(), 300);
+        }, 5000);
+    });
+
+    // CSRF token handling for AJAX requests
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    // Timesheet approval handling
+    window.approveTimesheet = async function(timesheetId) {
+        if (!confirm('Are you sure you want to approve this timesheet?')) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/timesheet/${timesheetId}/approve/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const data = await response.json();
+            
+            if (response.ok) {
+                // Update UI
+                const timesheetElement = document.querySelector(`[data-timesheet-id="${timesheetId}"]`);
+                if (timesheetElement) {
+                    timesheetElement.remove();
+                }
+                
+                // Update pending count
+                const pendingBadge = document.querySelector('.notifications .badge');
+                if (pendingBadge) {
+                    const currentCount = parseInt(pendingBadge.textContent);
+                    pendingBadge.textContent = currentCount - 1;
+                }
+                
+                // Show success message
+                showNotification('Timesheet approved successfully', 'success');
+                
+                // Update stats if they exist
+                updateDashboardStats(data);
+            } else {
+                throw new Error(data.error || 'Failed to approve timesheet');
+            }
+        } catch (error) {
+            showNotification(error.message, 'error');
+        }
+    };
+
+    // Timesheet rejection handling
+    window.rejectTimesheet = async function(timesheetId) {
+        const reason = prompt('Please enter a reason for rejecting this timesheet:');
+        if (!reason) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/timesheet/${timesheetId}/reject/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ reason })
+            });
+
+            const data = await response.json();
+            
+            if (response.ok) {
+                // Update UI
+                const timesheetElement = document.querySelector(`[data-timesheet-id="${timesheetId}"]`);
+                if (timesheetElement) {
+                    timesheetElement.remove();
+                }
+                
+                // Update pending count
+                const pendingBadge = document.querySelector('.notifications .badge');
+                if (pendingBadge) {
+                    const currentCount = parseInt(pendingBadge.textContent);
+                    pendingBadge.textContent = currentCount - 1;
+                }
+                
+                // Show success message
+                showNotification('Timesheet rejected successfully', 'success');
+            } else {
+                throw new Error(data.error || 'Failed to reject timesheet');
+            }
+        } catch (error) {
+            showNotification(error.message, 'error');
+        }
+    };
+
+    // Helper function to show notifications
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `message ${type}`;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            notification.style.opacity = '0';
+            setTimeout(() => notification.remove(), 300);
+        }, 5000);
+    }
+
+    // Helper function to update dashboard statistics
+    function updateDashboardStats(data) {
+        if (data.total_hours !== undefined) {
+            const totalHoursElement = document.querySelector('.total-hours');
+            if (totalHoursElement) {
+                totalHoursElement.textContent = data.total_hours.toFixed(2);
+            }
+        }
+    }
+
+    // Navigation handling
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (this.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                navLinks.forEach(l => l.parentElement.classList.remove('active'));
+                this.parentElement.classList.add('active');
+            }
+        });
+    });
+
+    // Profile dropdown
+    const profileDropdown = document.querySelector('.profile-dropdown');
+    if (profileDropdown) {
+        profileDropdown.addEventListener('click', function(e) {
+            this.classList.toggle('active');
+            e.stopPropagation();
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!profileDropdown.contains(e.target)) {
+                profileDropdown.classList.remove('active');
+            }
+        });
+    }
+
+    // Quick actions handling
+    const actionButtons = document.querySelectorAll('.action-btn');
+    actionButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            if (!this.getAttribute('href')) {
+                e.preventDefault();
+                const action = this.dataset.action;
+                
+                switch(action) {
+                    case 'generate-report':
+                        alert('Report generation functionality will be implemented soon.');
+                        break;
+                    case 'send-announcement':
+                        alert('Announcement system will be implemented soon.');
+                        break;
+                    case 'system-settings':
+                        alert('Settings panel will be implemented soon.');
+                        break;
+                }
+            }
+        });
+    });
+
+    // Notifications handling
+    const notificationsBell = document.querySelector('.notifications');
+    if (notificationsBell) {
+        notificationsBell.addEventListener('click', function() {
+            // TODO: Implement notifications panel
+            alert('Notifications panel will be implemented soon.');
+        });
+    }
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+            // TODO: Implement search functionality
+            console.log('Search query:', e.target.value);
+        });
+    }
+
+    // Mobile responsive handling
+    const sidebar = document.querySelector('.sidebar');
+    const toggleBtn = document.querySelector('.toggle-btn');
+    const closeSidebarBtn = document.querySelector('.close-sidebar');
+
+    if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', function() {
+            sidebar.classList.add('active');
+        });
+    }
+
+    if (closeSidebarBtn && sidebar) {
+        closeSidebarBtn.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+        });
+    }
+
+    // Add hover effect for stat cards
+    const statCards = document.querySelectorAll('.stat-card');
+    statCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+
+    // Initialize any charts or data visualizations here if needed
+    // TODO: Add chart initialization code when implementing dashboard analytics
 });
 
 function loadPageContent() {

@@ -24,14 +24,23 @@ from accounts import views as accounts_views
 urlpatterns = [
     path('django-admin/', admin.site.urls),  # Changed from 'admin/' to 'django-admin/'
     path('login/', accounts_views.login_view, name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('logout/', accounts_views.custom_logout, name='logout'),
     path('', accounts_views.login_view, name='home'),
     
-    # Dashboard URLs - Note the admin dashboard URL is now before django-admin
+    # Admin URLs
     path('admin/dashboard/', accounts_views.admin_dashboard, name='admin_dashboard'),
+    path('admin/add-user/', accounts_views.add_user, name='add_user'),  # New URL for adding users
+    path('admin/update-login-background/', accounts_views.update_login_background, name='update_login_background'),
+
+    # Dashboard URLs - Note the admin dashboard URL is now before django-admin
     path('dashboard/', accounts_views.student_dashboard, name='student_dashboard'),
     path('supervisor/dashboard/', accounts_views.supervisor_dashboard, name='supervisor_dashboard'),
     path('director/dashboard/', accounts_views.director_dashboard, name='director_dashboard'),
+    
+    # Timesheet management URLs
+    path('timesheet/submit/', accounts_views.submit_timesheet, name='submit_timesheet'),
+    path('timesheet/<int:timesheet_id>/approve/', accounts_views.approve_timesheet, name='approve_timesheet'),
+    path('timesheet/<int:timesheet_id>/reject/', accounts_views.reject_timesheet, name='reject_timesheet'),
     
     # Password Reset URLs
     path('password_reset/', auth_views.PasswordResetView.as_view(

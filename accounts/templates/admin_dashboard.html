@@ -51,6 +51,7 @@
         <li><a href="#assignments"><i class="fas fa-tasks"></i> Work Assignments</a></li>
         <li><a href="#reports"><i class="fas fa-file-alt"></i> Reports</a></li>
         <li><a href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+        <li><a href="{% url 'update_login_background' %}"><i class="fas fa-image"></i> Update Login Background</a></li>
         <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
 </nav>
@@ -129,10 +130,18 @@
             <div class="panel quick-actions">
                 <h2>Quick Actions</h2>
                 <div class="action-buttons">
-                    <button class="action-btn" data-action="add-user"><i class="fas fa-plus"></i> Add New User</button>
-                    <button class="action-btn" data-action="generate-report"><i class="fas fa-clipboard-list"></i> Generate Report</button>
-                    <button class="action-btn" data-action="send-announcement"><i class="fas fa-envelope"></i> Send Announcement</button>
-                    <button class="action-btn" data-action="system-settings"><i class="fas fa-cog"></i> System Settings</button>
+                    <a href="{% url 'add_user' %}" class="action-btn" data-action="add-user">
+                        <i class="fas fa-plus"></i> Add New User
+                    </a>
+                    <button class="action-btn" data-action="generate-report">
+                        <i class="fas fa-clipboard-list"></i> Generate Report
+                    </button>
+                    <button class="action-btn" data-action="send-announcement">
+                        <i class="fas fa-envelope"></i> Send Announcement
+                    </button>
+                    <button class="action-btn" data-action="system-settings">
+                        <i class="fas fa-cog"></i> System Settings
+                    </button>
                 </div>
             </div>
         </div>
