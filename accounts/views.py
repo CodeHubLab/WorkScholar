@@ -206,6 +206,83 @@ def admin_dashboard(request):
 
 @login_required
 @user_type_required(['admin'])
+def edit_user(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        user = get_object_or_404(User, id=user_id)
+        
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        user_type = request.POST.get('user_type')
+        id_number = request.POST.get('id_number')
+        
+        if User.objects.exclude(id=user_id).filter(username=username).exists():
+            messages.error(request, 'Username already exists')
+            return redirect('add_user')
+            
+        if User.objects.exclude(id=user_id).filter(email=email).exists():
+            messages.error(request, 'Email already exists')
+            return redirect('add_user')
+            
+        try:
+            user.username = username
+            user.email = email
+            user.user_type = user_type
+            user.id_number = id_number
+            user.save()
+            
+            messages.success(request, f'Successfully updated user: {username}')
+        except Exception as e:
+            messages.error(request, f'Error updating user: {str(e)}')
+            
+        return redirect('add_user')
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+@login_required
+@user_type_required(['admin'])
+def delete_user(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        user = get_object_or_404(User, id=user_id)
+        
+        try:
+            username = user.username
+            user.delete()
+            messages.success(request, f'Successfully deleted user: {username}')
+        except Exception as e:
+            messages.error(request, f'Error deleting user: {str(e)}')
+            
+        return redirect('add_user')
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+@login_required
+@user_type_required(['admin'])
+def change_password(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        user = get_object_or_404(User, id=user_id)
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_new_password')
+        
+        if new_password != confirm_password:
+            messages.error(request, 'Passwords do not match')
+            return redirect('add_user')
+            
+        try:
+            user.set_password(new_password)
+            user.save()
+            messages.success(request, f'Successfully changed password for user: {user.username}')
+        except Exception as e:
+            messages.error(request, f'Error changing password: {str(e)}')
+            
+        return redirect('add_user')
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+@login_required
+@user_type_required(['admin'])
 def add_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -243,7 +320,8 @@ def add_user(request):
             messages.error(request, f'Error creating user: {str(e)}')
             return redirect('add_user')
     
-    return render(request, 'add_user.html')
+    users = User.objects.all().order_by('username')
+    return render(request, 'add_user.html', {'users': users})
 
 @never_cache
 @login_required

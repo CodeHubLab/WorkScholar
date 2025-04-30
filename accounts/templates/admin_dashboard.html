@@ -46,7 +46,7 @@
     </div>
     <ul class="nav-links">
         <li class="active"><a href="#dashboard"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-        <li><a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\manageusers.html"><i class="fas fa-users"></i> Manage Users</a></li>
+        <a href="{% url 'add_user' %}" class="action-btn" data-action="add-user"><i class="fas fa-users"></i> Manage Users</a></li>
         <li><a href="#departments"><i class="fas fa-building"></i> Departments</a></li>
         <li><a href="#assignments"><i class="fas fa-tasks"></i> Work Assignments</a></li>
         <li><a href="#reports"><i class="fas fa-file-alt"></i> Reports</a></li>
@@ -130,9 +130,9 @@
             <div class="panel quick-actions">
                 <h2>Quick Actions</h2>
                 <div class="action-buttons">
-                    <a href="{% url 'add_user' %}" class="action-btn" data-action="add-user">
+                    <!--<a href="{% url 'add_user' %}" class="action-btn" data-action="add-user">
                         <i class="fas fa-plus"></i> Add New User
-                    </a>
+                    </a> -->
                     <button class="action-btn" data-action="generate-report">
                         <i class="fas fa-clipboard-list"></i> Generate Report
                     </button>

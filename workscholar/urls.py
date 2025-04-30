@@ -29,7 +29,10 @@ urlpatterns = [
     
     # Admin URLs
     path('admin/dashboard/', accounts_views.admin_dashboard, name='admin_dashboard'),
-    path('admin/add-user/', accounts_views.add_user, name='add_user'),  # New URL for adding users
+    path('admin/add-user/', accounts_views.add_user, name='add_user'),
+    path('admin/edit-user/', accounts_views.edit_user, name='edit_user'),
+    path('admin/delete-user/', accounts_views.delete_user, name='delete_user'),
+    path('admin/change-password/', accounts_views.change_password, name='change_password'),
     path('admin/update-login-background/', accounts_views.update_login_background, name='update_login_background'),
 
     # Dashboard URLs - Note the admin dashboard URL is now before django-admin
