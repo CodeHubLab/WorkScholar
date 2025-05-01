@@ -476,14 +476,16 @@ def update_manager_background(request):
         if form.is_valid():
             # Delete existing background if any
             ManagerBackground.objects.all().delete()
-            # Save the new background
+            # Save the new background with opacity
             background = form.save()
-            messages.success(request, 'Dashboard background updated successfully.')
+            messages.success(request, 'Dashboard background and opacity updated successfully.')
             return redirect('admin_dashboard')
         else:
             messages.error(request, 'Error updating background. Please check the file and try again.')
     else:
-        form = ManagerBackgroundForm()
+        # Get current background settings if they exist
+        current_background = ManagerBackground.objects.first()
+        form = ManagerBackgroundForm(instance=current_background)
     
     return render(request, 'admin/update_manager_background.html', {'form': form})
 

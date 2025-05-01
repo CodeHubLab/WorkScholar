@@ -30,9 +30,20 @@ class LoginBackgroundForm(forms.ModelForm):
         return image
 
 class ManagerBackgroundForm(forms.ModelForm):
+    opacity = forms.FloatField(
+        min_value=0.0,
+        max_value=1.0,
+        initial=0.25,
+        widget=forms.NumberInput(attrs={
+            'type': 'range',
+            'step': '0.05',
+            'class': 'opacity-slider'
+        })
+    )
+    
     class Meta:
         model = ManagerBackground
-        fields = ['image']
+        fields = ['image', 'opacity']
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

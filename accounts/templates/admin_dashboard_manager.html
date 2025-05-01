@@ -49,31 +49,29 @@
         flex: 1;
         margin-left: 280px;
         padding: 2rem;
-        background: var(--bg-dark);
+        background: transparent;
         position: relative;
-        z-index: 1;
+        z-index: 2;
     }
 
-    .main-content::before {
-        content: '';
+    .background-overlay {
         position: fixed;
         top: 0;
         left: 280px;
         right: 0;
         bottom: 0;
-        {% if manager_background %}
-        background-image: url('{{ manager_background.image.url }}');
-        {% endif %}
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        opacity: 0.25;
         z-index: 0;
+        {% if manager_background %}
+        background-image: url('{{ manager_background.image.url }}');
+        opacity: {{ manager_background.opacity }};
+        {% endif %}
     }
 
-    .main-content::after {
-        content: '';
+    .content-overlay {
         position: fixed;
         top: 0;
         left: 280px;
@@ -104,6 +102,7 @@
         letter-spacing: 2px;
         background: linear-gradient(45deg, var(--accent) 0%, var(--accent-pink) 100%);
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
         text-shadow: 0 0 20px var(--glow);
     }
@@ -359,9 +358,11 @@
 
 {% block content %}
 <div class="dashboard-layout">
+    <div class="background-overlay"></div>
+    <div class="content-overlay"></div>
     <aside class="sidebar">
         <div class="logo-section">
-            <h1 class="app-logo">Work Scholar</h1>
+            <h1 class="app-logo">SYS ADMIN</h1>
             <div class="admin-badge">Absolute Admin</div>
         </div>
 

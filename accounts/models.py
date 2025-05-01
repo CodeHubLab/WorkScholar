@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
-from django.core.validators import FileExtensionValidator
+from django.core.validators import FileExtensionValidator, MinValueValidator, MaxValueValidator
 
 class User(AbstractUser):
     USER_TYPE_CHOICES = (
@@ -110,6 +110,10 @@ class ManagerBackground(models.Model):
         upload_to='manager_backgrounds/',
         validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif'])]
     )
+    opacity = models.FloatField(default=0.25, validators=[
+        MinValueValidator(0.0),
+        MaxValueValidator(1.0)
+    ])
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
