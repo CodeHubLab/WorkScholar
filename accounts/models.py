@@ -16,6 +16,10 @@ class User(AbstractUser):
     department = models.CharField(max_length=100, null=True, blank=True)
     total_hours = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     hourly_rate = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    is_manager = models.BooleanField(default=False)
+
+    def is_absolute_admin(self):
+        return self.is_manager and self.username == 'admin' and self.email == 'brentifromph696@gmail.com'
 
     class Meta:
         db_table = 'auth_user'
@@ -94,6 +98,16 @@ class Notification(models.Model):
 class LoginBackground(models.Model):
     image = models.ImageField(
         upload_to='login_backgrounds/',
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif'])]
+    )
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-uploaded_at']
+
+class ManagerBackground(models.Model):
+    image = models.ImageField(
+        upload_to='manager_backgrounds/',
         validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'gif'])]
     )
     uploaded_at = models.DateTimeField(auto_now_add=True)

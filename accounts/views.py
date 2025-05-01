@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.db import models, transaction
 from datetime import timedelta
-from .models import User, WorkAssignment, TimeSheet, LoginBackground
+from .models import User, WorkAssignment, TimeSheet, LoginBackground, ManagerBackground
 from .utils import (
     user_type_required,
     get_weekly_hours,
@@ -19,7 +19,7 @@ from .utils import (
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.utils.cache import add_never_cache_headers
-from .forms import LoginBackgroundForm
+from .forms import LoginBackgroundForm, ManagerBackgroundForm
 
 @never_cache
 def login_view(request):
@@ -139,78 +139,16 @@ def student_dashboard(request):
 @never_cache
 @login_required
 @user_type_required(['admin'])
-def admin_dashboard(request):
-    if not request.user.is_authenticated:
-        messages.error(request, 'Please login first')
-        return redirect('login')
-    # Get statistics for the dashboard
-    total_students = User.objects.filter(user_type='student_working').count()
-    active_assignments = WorkAssignment.objects.filter(is_active=True).count()
-    total_departments = WorkAssignment.objects.values('department').distinct().count()
-    total_hours = TimeSheet.objects.filter(approved=True).aggregate(
-        total=models.Sum('hours_worked')
-    )['total'] or 0
-
-    # Get recent activities
-    recent_activities = []
-    
-    # Recent user registrations
-    recent_users = User.objects.filter(
-        date_joined__gte=timezone.now() - timedelta(days=7)
-    ).order_by('-date_joined')[:5]
-    
-    for user in recent_users:
-        recent_activities.append({
-            'description': f'New user registration: {user.username}',
-            'timestamp': user.date_joined
-        })
-    
-    # Recent work assignments
-    recent_assignments = WorkAssignment.objects.filter(
-        start_date__gte=timezone.now() - timedelta(days=7)
-    ).order_by('-start_date')[:5]
-    
-    for assignment in recent_assignments:
-        recent_activities.append({
-            'description': f'New work assignment: {assignment.student.username} - {assignment.department}',
-            'timestamp': assignment.start_date
-        })
-    
-    # Recent timesheet approvals
-    recent_timesheets = TimeSheet.objects.filter(
-        approved=True,
-        approved_at__gte=timezone.now() - timedelta(days=7)
-    ).order_by('-approved_at')[:5]
-    
-    for timesheet in recent_timesheets:
-        recent_activities.append({
-            'description': f'Timesheet approved: {timesheet.student.username}',
-            'timestamp': timesheet.approved_at
-        })
-    
-    # Sort activities by timestamp
-    recent_activities.sort(key=lambda x: x['timestamp'], reverse=True)
-    recent_activities = recent_activities[:10]  # Keep only the 10 most recent
-
-    context = {
-        'total_students': total_students,
-        'active_assignments': active_assignments,
-        'total_departments': total_departments,
-        'total_hours': total_hours,
-        'recent_activities': recent_activities,
-    }
-    
-    response = render(request, 'admin_dashboard.html', context)
-    add_never_cache_headers(response)
-    return response
-
-@login_required
-@user_type_required(['admin'])
 def edit_user(request):
     if request.method == 'POST':
         user_id = request.POST.get('user_id')
-        user = get_object_or_404(User, id=user_id)
+        target_user = get_object_or_404(User, id=user_id)
         
+        # Check if current user has permission to edit the target user
+        if target_user.user_type == 'admin' and not request.user.is_absolute_admin():
+            messages.error(request, 'You do not have permission to edit admin accounts')
+            return redirect('add_user')
+            
         username = request.POST.get('username')
         email = request.POST.get('email')
         user_type = request.POST.get('user_type')
@@ -225,11 +163,11 @@ def edit_user(request):
             return redirect('add_user')
             
         try:
-            user.username = username
-            user.email = email
-            user.user_type = user_type
-            user.id_number = id_number
-            user.save()
+            target_user.username = username
+            target_user.email = email
+            target_user.user_type = user_type
+            target_user.id_number = id_number
+            target_user.save()
             
             messages.success(request, f'Successfully updated user: {username}')
         except Exception as e:
@@ -245,6 +183,11 @@ def delete_user(request):
     if request.method == 'POST':
         user_id = request.POST.get('user_id')
         user = get_object_or_404(User, id=user_id)
+        
+        # Check if current user has permission to delete the target user
+        if user.user_type == 'admin' and not request.user.is_absolute_admin():
+            messages.error(request, 'You do not have permission to delete admin accounts')
+            return redirect('add_user')
         
         try:
             username = user.username
@@ -263,6 +206,12 @@ def change_password(request):
     if request.method == 'POST':
         user_id = request.POST.get('user_id')
         user = get_object_or_404(User, id=user_id)
+        
+        # Check if current user has permission to change password of target user
+        if user.user_type == 'admin' and not request.user.is_absolute_admin():
+            messages.error(request, 'You do not have permission to change admin passwords')
+            return redirect('add_user')
+            
         new_password = request.POST.get('new_password')
         confirm_password = request.POST.get('confirm_new_password')
         
@@ -283,47 +232,36 @@ def change_password(request):
 
 @login_required
 @user_type_required(['admin'])
-def add_user(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        confirm_password = request.POST.get('confirm_password')
-        user_type = request.POST.get('user_type')
-        id_number = request.POST.get('id_number')
-        department = request.POST.get('department', '')
-        
-        if password != confirm_password:
-            messages.error(request, 'Passwords do not match')
-            return redirect('add_user')
-            
-        if User.objects.filter(username=username).exists():
-            messages.error(request, 'Username already exists')
-            return redirect('add_user')
-            
-        if User.objects.filter(email=email).exists():
-            messages.error(request, 'Email already exists')
-            return redirect('add_user')
-            
-        try:
-            user = User.objects.create_user(
-                username=username,
-                email=email,
-                password=password,
-                user_type=user_type,
-                id_number=id_number,
-                department=department
-            )
-            messages.success(request, f'Successfully created new user: {username}')
-            return redirect('admin_dashboard')
-        except Exception as e:
-            messages.error(request, f'Error creating user: {str(e)}')
-            return redirect('add_user')
-    
-    users = User.objects.all().order_by('username')
-    return render(request, 'add_user.html', {'users': users})
+def admin_dashboard(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Please login first')
+        return redirect('login')
 
-@never_cache
+    # Get statistics for the dashboard
+    total_students = User.objects.filter(user_type='student_working').count()
+    active_assignments = WorkAssignment.objects.filter(is_active=True).count()
+    total_departments = WorkAssignment.objects.values('department').distinct().count()
+    total_hours = TimeSheet.objects.filter(approved=True).aggregate(
+        total=models.Sum('hours_worked')
+    )['total'] or 0
+
+    # Get the manager background if it exists
+    manager_background = ManagerBackground.objects.first()
+
+    context = {
+        'total_students': total_students,
+        'active_assignments': active_assignments,
+        'total_departments': total_departments,
+        'total_hours': total_hours,
+        'is_manager': request.user.is_absolute_admin(),
+        'manager_background': manager_background,
+    }
+
+    template = 'admin_dashboard_manager.html' if request.user.is_absolute_admin() else 'admin_dashboard.html'
+    response = render(request, template, context)
+    add_never_cache_headers(response)
+    return response
+
 @login_required
 @user_type_required(['supervisor'])
 def supervisor_dashboard(request):
@@ -525,3 +463,81 @@ def update_login_background(request):
         form = LoginBackgroundForm()
     
     return render(request, 'admin/update_login_background.html', {'form': form})
+
+@login_required
+@user_type_required(['admin'])
+def update_manager_background(request):
+    if not request.user.is_absolute_admin():
+        messages.error(request, 'Only the manager has permission to change the dashboard background')
+        return redirect('admin_dashboard')
+        
+    if request.method == 'POST':
+        form = ManagerBackgroundForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Delete existing background if any
+            ManagerBackground.objects.all().delete()
+            # Save the new background
+            background = form.save()
+            messages.success(request, 'Dashboard background updated successfully.')
+            return redirect('admin_dashboard')
+        else:
+            messages.error(request, 'Error updating background. Please check the file and try again.')
+    else:
+        form = ManagerBackgroundForm()
+    
+    return render(request, 'admin/update_manager_background.html', {'form': form})
+
+@login_required
+@user_type_required(['admin'])
+def add_user(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Please login first')
+        return redirect('login')
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        user_type = request.POST.get('user_type')
+        id_number = request.POST.get('id_number')
+        
+        # Validate passwords match
+        if password != confirm_password:
+            messages.error(request, 'Passwords do not match')
+            return redirect('add_user')
+            
+        # Check if username exists
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists')
+            return redirect('add_user')
+            
+        # Check if email exists
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email already exists')
+            return redirect('add_user')
+            
+        try:
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                password=password,
+                user_type=user_type,
+                id_number=id_number
+            )
+            messages.success(request, f'Successfully created user: {username}')
+        except Exception as e:
+            messages.error(request, f'Error creating user: {str(e)}')
+        
+        return redirect('add_user')
+        
+    # Get all users for display
+    users = User.objects.all().order_by('username')
+    
+    context = {
+        'users': users,
+    }
+    
+    response = render(request, 'add_user.html', context)
+    add_never_cache_headers(response)
+    return response
