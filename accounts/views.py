@@ -543,3 +543,69 @@ def add_user(request):
     response = render(request, 'add_user.html', context)
     add_never_cache_headers(response)
     return response
+
+# Password Reset URLs begin here...
+
+def snake_game(request):
+    """
+    View for the snake game.
+    This game is a fun easter egg in the application.
+    """
+    return render(request, 'snake_game.html')
+
+def signup(request):
+    if request.method == 'POST':
+        # Get the background image if exists
+        login_background = LoginBackground.objects.filter(is_active=True).first()
+        
+        # Get form data
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        student_id = request.POST.get('student_id')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+        course = request.POST.get('course')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+
+        # Validate passwords match
+        if password != confirm_password:
+            messages.error(request, 'Passwords do not match')
+            return render(request, 'signup.html', {'login_background': login_background})
+
+        # Check if email already exists
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email already registered')
+            return render(request, 'signup.html', {'login_background': login_background})
+
+        # Check if student ID already exists
+        if User.objects.filter(id_number=student_id).exists():
+            messages.error(request, 'Student ID already registered')
+            return render(request, 'signup.html', {'login_background': login_background})
+
+        # Create new user
+        try:
+            user = User.objects.create_user(
+                username=student_id,  # Use student ID as username
+                email=email,
+                password=password,
+                first_name=first_name,
+                last_name=last_name,
+                id_number=student_id,
+                phone_number=phone,
+                user_type='student_working',  # Default to work scholar type
+                department=course  # Use course as department
+            )
+            
+            # Log the user in
+            login(request, user)
+            messages.success(request, 'Account created successfully!')
+            return redirect('student_dashboard')
+            
+        except Exception as e:
+            messages.error(request, f'Error creating account: {str(e)}')
+            return render(request, 'signup.html', {'login_background': login_background})
+
+    # GET request - show signup form
+    login_background = LoginBackground.objects.filter(is_active=True).first()
+    return render(request, 'signup.html', {'login_background': login_background})
