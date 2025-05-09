@@ -3,356 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found</title>
+    <title>404 - Page Not Found</title>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
             font-family: Arial, sans-serif;
-        }
-        #game-container {
-            margin-bottom: 20px;
-        }
-        canvas {
-            border: 2px solid #333;
-            background-color: #fff;
-        }
-        #score-container {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 5px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #instructions {
-            margin-top: 20px;
             text-align: center;
-            max-width: 500px;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+        }
+        h1 {
+            font-size: 4rem;
+            margin: 0;
+        }
+        p {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>Play Snake</h1>
-    <h2>404 Error</h2>
-    <div id="score-container">Score: <span id="score">0</span></div>
-    <div id="game-container">
-        <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div class="container">
+        <h1>404</h1>
+        <p>Oops! The page you are looking for does not exist.</p>
+        <p><a href="/">Go back to the homepage</a></p>
     </div>
-    <div>
-        <button id="startBtn">Start Game</button>
-        <button id="resetBtn">Reset Game</button>
-    </div>
-    <div id="instructions">
-        <p>Use the Arrow Keys to move the snake. Collect food to grow and earn points!</p>
-        <p>Game Over if you hit the walls or yourself.</p>
-    </div>
-
-    <script>
-        // Game variables
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        const startBtn = document.getElementById('startBtn');
-        const resetBtn = document.getElementById('resetBtn');
-        const scoreElement = document.getElementById('score');
-        
-        const gridSize = 20;
-        const gridWidth = canvas.width / gridSize;
-        const gridHeight = canvas.height / gridSize;
-        
-        let snake;
-        let food;
-        let direction;
-        let gameInterval;
-        let score;
-        let gameRunning;
-        let gameSpeed;
-        
-        const dragonHead = new Image();
-        dragonHead.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAABCBJREFUOE9dVH9MU1cUPueVH1KcdUD5UVqhSElFHOIYCYtLKYjTqBvZFpfFhWVmGQnBxMi2SDQZyzKXydivDkeU4BxDhSxszunmoiYjBgSSQbMWEGaLIAhoKdiSWqXvLvfe1/Z174++3vvOPfc75/vOhyA9CAgECFshgPSPLhCA8P1wrOw7iw4goEBoDgRC3wJBJKFz/fbxjUkaxXRWwvrF/ycL3ma1WvMWFhZGzWbzihwETckfQhGKOGGfSPl7fGwrCgLJzTH2Go26GR4Qxu1wzqfe6LleVvBccW+eQeeksQwYIPuhJfGKAWDk7nTila7L+wcHh16ofPOtz7eVFXXLCyaiKHzVdKrqxl/9pgMHahpLTAUDoat4Ng6RbxIYHR19yjY8sf1ry7ef7HmporV8e+kVhQdm47JVPu/UkhBIiXv8ae1HTUmJ6oXDtYc+1uufXgz2VgSRdjySBbtzPtU9dy/zyJH6bzblb75ZVV3T8Mi9pCx8Vv8vChhoarmwo+N8e7WppOTPytfLTxkMBj/rGBBEVnIEpQCTk8uaq1cvlbV1/vxOVma2zWTedsliaT5oyM4e1mnX3d7wjLHn9Jkzh82m4osfvr//R0kOhOYREAkSIiKiQAgBRAGJ3XYr90RLW9XwyJhRk6SbfRQgZObufEaMMr5k2e/zbTDmfOH2PkxA8Ymwa1fp2VlNfE99qXmFJuayYdwEdYXQ12ctPPRBXePcfVdy3qYi+z/WW68mqtNglXI13JmcgGxDFqjWqr4cv23P37O7vP1YXXUrB0Wz8KRhwRIEx31P6oWOzt0Xf/njtTmX90W1Wgtut5eoU9LB5/eh/7EHNOvSLClpqqmTx+sa5B0jKJGChCBTNgA4HM6Mk60/vN3Z+esbWl1OVJwyMcvz0A+rVSqiTk5Cn98DLvfcuVgleOty91Wb67mwg5VSZkIjR/eHpobSB65bt3b9dLly2DaxRZ2cEb1mbXJCtCIWMQYhKkpsiokXl7Xp6nHLsaMtJNgvCWpYh1TfQFg/HU7nqjHHzPOt33dW9920bkxW64x6/fqz07NTAqJ/5eWKnUffq9l3RwSCChDYITobdNLoeUQ6/FLJhBDG+tTSYsL0yIz+s4bmg57lJ6jVZtqWvQ9ii18pPF67d69PZHHI5MIZZtPLKZGPTthmAAYGxze3t3VVdHf3F8VGx+5YwUDLQG/Hu8EYejnVXoC9hTDLFGboRplNuVwP1jR/17Hzt9+vlW/JL2i8NzuT3tV14hqdiAijYzPCpSdDGMQpE0LIC1GyxdARTqzM8mTjJ3dTajy8N5FtYJnpN+B946bLYtgWEFEkiAp+LtxRyrKUn6qffRIEFkx7FWHZwYW0S0Q+uggiQVBQ7DK7lygLjlTYg3n3uJVSVhk0blmCQI0B/gMXhPIsiF2rsgAAAABJRU5ErkJggg==';
-
-        // Initialize the game
-        function initGame() {
-            // Initialize snake in the middle of the canvas
-            snake = [
-                {x: Math.floor(gridWidth / 2), y: Math.floor(gridHeight / 2)}
-            ];
-            
-            // Generate first food
-            generateFood();
-            
-            // Set initial direction (right)
-            direction = 'right';
-            
-            // Set initial score
-            score = 0;
-            scoreElement.innerText = score;
-            
-            // Set game speed (milliseconds)
-            gameSpeed = 150;
-            
-            // Set game state
-            gameRunning = false;
-            
-            // Clear any existing interval
-            if (gameInterval) {
-                clearInterval(gameInterval);
-                gameInterval = null;
-            }
-            
-            // Draw initial state
-            drawGame();
-        }
-        
-        // Generate food at random position
-        function generateFood() {
-            // Generate random position
-            const foodX = Math.floor(Math.random() * gridWidth);
-            const foodY = Math.floor(Math.random() * gridHeight);
-            
-            // Check if food position overlaps with snake
-            const isOnSnake = snake.some(segment => segment.x === foodX && segment.y === foodY);
-            
-            if (isOnSnake) {
-                // If food is on snake, generate new food
-                generateFood();
-            } else {
-                // Set food position
-                food = {x: foodX, y: foodY};
-            }
-        }
-        
-        // Draw the game
-        function drawGame() {
-            // Clear canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw snake
-            snake.forEach((segment, index) => {
-                if (index === 0) {
-                    // Draw dragon head
-                    const angle = {
-                        'up': -Math.PI/2,
-                        'down': Math.PI/2,
-                        'left': Math.PI,
-                        'right': 0
-                    }[direction];
-                    
-                    ctx.save();
-                    ctx.translate(segment.x * gridSize + gridSize/2, segment.y * gridSize + gridSize/2);
-                    ctx.rotate(angle);
-                    ctx.drawImage(dragonHead, -gridSize/2, -gridSize/2, gridSize, gridSize);
-                    ctx.restore();
-                } else {
-                    // Draw dragon scale body segments
-                    ctx.save();
-                    
-                    // Create gradient for scale effect
-                    const gradient = ctx.createRadialGradient(
-                        segment.x * gridSize + gridSize/2, 
-                        segment.y * gridSize + gridSize/2, 
-                        0,
-                        segment.x * gridSize + gridSize/2, 
-                        segment.y * gridSize + gridSize/2, 
-                        gridSize/2
-                    );
-                    
-                    gradient.addColorStop(0, '#4CAF50');  // Lighter green center
-                    gradient.addColorStop(0.6, '#2E7D32'); // Darker green edge
-                    gradient.addColorStop(1, '#1B5E20');   // Darkest green border
-                    
-                    // Draw scale background
-                    ctx.fillStyle = gradient;
-                    ctx.beginPath();
-                    ctx.arc(
-                        segment.x * gridSize + gridSize/2,
-                        segment.y * gridSize + gridSize/2,
-                        gridSize/2 - 1,
-                        0,
-                        2 * Math.PI
-                    );
-                    ctx.fill();
-                    
-                    // Add scale shine effect
-                    ctx.beginPath();
-                    ctx.arc(
-                        segment.x * gridSize + gridSize/3,
-                        segment.y * gridSize + gridSize/3,
-                        gridSize/6,
-                        0,
-                        2 * Math.PI
-                    );
-                    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-                    ctx.fill();
-                    
-                    ctx.restore();
-                }
-            });
-            
-            // Draw food
-            ctx.fillStyle = '#FF0000';
-            ctx.beginPath();
-            const centerX = food.x * gridSize + gridSize / 2;
-            const centerY = food.y * gridSize + gridSize / 2;
-            const radius = gridSize / 2;
-            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-            ctx.fill();
-        }
-        
-        // Move the snake
-        function moveSnake() {
-            // Create new head based on current direction
-            const head = {...snake[0]};
-            
-            switch (direction) {
-                case 'up':
-                    head.y -= 1;
-                    break;
-                case 'down':
-                    head.y += 1;
-                    break;
-                case 'left':
-                    head.x -= 1;
-                    break;
-                case 'right':
-                    head.x += 1;
-                    break;
-            }
-            
-            // Check for collisions
-            if (checkCollision(head)) {
-                gameOver();
-                return;
-            }
-            
-            // Add new head to the beginning of snake array
-            snake.unshift(head);
-            
-            // Check if snake ate the food
-            if (head.x === food.x && head.y === food.y) {
-                // Increase score
-                score += 10;
-                scoreElement.innerText = score;
-                
-                // Generate new food
-                generateFood();
-                
-                // Increase speed slightly
-                if (gameSpeed > 50) {
-                    gameSpeed -= 5;
-                    if (gameInterval) {
-                        clearInterval(gameInterval);
-                        gameInterval = setInterval(gameLoop, gameSpeed);
-                    }
-                }
-            } else {
-                // Remove tail if food wasn't eaten
-                snake.pop();
-            }
-        }
-        
-        // Check for collisions
-        function checkCollision(head) {
-            // Check wall collisions
-            if (head.x < 0 || head.x >= gridWidth || head.y < 0 || head.y >= gridHeight) {
-                return true;
-            }
-            
-            // Check self collision
-            return snake.some(segment => segment.x === head.x && segment.y === head.y);
-        }
-        
-        // Game loop
-        function gameLoop() {
-            moveSnake();
-            drawGame();
-        }
-        
-        // Game over
-        function gameOver() {
-            clearInterval(gameInterval);
-            gameInterval = null;
-            gameRunning = false;
-            
-            // Draw "Game Over" text
-            ctx.fillStyle = 'rgba(4, 0, 0, 0.75)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.font = '30px Arial';
-            ctx.fillStyle = 'white';
-            ctx.textAlign = 'center';
-            ctx.fillText('Game Over!', canvas.width / 2, canvas.height / 2 - 15);
-            ctx.font = '20px Arial';
-            ctx.fillText(`Score: ${score}`, canvas.width / 2, canvas.height / 2 + 20);
-            ctx.fillText('Press Start to play again', canvas.width / 2, canvas.height / 2 + 50);
-        }
-        
-        // Start the game
-        function startGame() {
-            if (!gameRunning) {
-                gameRunning = true;
-                gameInterval = setInterval(gameLoop, gameSpeed);
-            }
-        }
-        
-        // Reset the game
-        function resetGame() {
-            if (gameInterval) {
-                clearInterval(gameInterval);
-                gameInterval = null;
-            }
-            initGame();
-        }
-        
-        // Event listeners
-        startBtn.addEventListener('click', startGame);
-        resetBtn.addEventListener('click', resetGame);
-        
-        // Keyboard controls
-        document.addEventListener('keydown', (event) => {
-            if (!gameRunning) return;
-            
-            const key = event.key;
-            
-            // Prevent arrow keys from scrolling the page
-            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(key)) {
-                event.preventDefault();
-            }
-            
-            // Update direction based on key press
-            // Prevent 180-degree turns (can't immediately go in opposite direction)
-            switch (key) {
-                case 'ArrowUp':
-                    if (direction !== 'down') direction = 'up';
-                    break;
-                case 'ArrowDown':
-                    if (direction !== 'up') direction = 'down';
-                    break;
-                case 'ArrowLeft':
-                    if (direction !== 'right') direction = 'left';
-                    break;
-                case 'ArrowRight':
-                    if (direction !== 'left') direction = 'right';
-                    break;
-            }
-        });
-        
-        // Initialize game on page load
-        initGame();
-    </script>
 </body>
 </html>
