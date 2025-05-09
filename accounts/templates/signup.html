@@ -1,0 +1,341 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Sign Up - Work Scholar{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --primary-color: #6c63ff;
+        --primary-hover: #5a52d5;
+        --text-dark: #333;
+        --text-medium: #666;
+        --text-light: #999;
+        --border-color: #ddd;
+        --error-color: #dc2626;
+        --success-color: #16a34a;
+    }
+
+    body {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        background-size: cover;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    {% if login_background %}
+    body {
+        background: url('{{ login_background.image.url }}') no-repeat center center fixed;
+        background-size: cover;
+    }
+    {% endif %}
+
+    .signup-container {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 500px;
+        padding: 40px;
+        margin: 20px;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .signup-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .logo-icon {
+        color: var(--primary-color);
+        font-size: 48px;
+        margin-bottom: 20px;
+        animation: bounceIn 0.6s ease-out;
+    }
+
+    @keyframes bounceIn {
+        0% { transform: scale(0); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    .signup-header h1 {
+        color: var(--text-dark);
+        font-size: 28px;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .signup-header p {
+        color: var(--text-medium);
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-bottom: 25px;
+    }
+
+    .input-group {
+        position: relative;
+    }
+
+    .form-grid .input-group:last-child {
+        grid-column: span 2;
+    }
+
+    .input-group i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-light);
+        font-size: 18px;
+        transition: color 0.3s;
+        pointer-events: none;
+    }
+
+    .input-group input,
+    .input-group select {
+        width: 100%;
+        padding: 15px 15px 15px 45px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background-color: white;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+        outline: none;
+    }
+
+    .input-group input:focus + i,
+    .input-group select:focus + i {
+        color: var(--primary-color);
+    }
+
+    .signup-btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 15px;
+        width: 100%;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 20px;
+    }
+
+    .signup-btn:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(108, 99, 255, 0.2);
+    }
+
+    .signup-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 3px 6px rgba(108, 99, 255, 0.1);
+    }
+
+    .login-link {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .login-link a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 16px;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 6px;
+    }
+
+    .login-link a:hover {
+        color: var(--primary-hover);
+        background-color: rgba(108, 99, 255, 0.05);
+    }
+
+    .messages {
+        margin-bottom: 25px;
+    }
+
+    .error-message {
+        background-color: #fef2f2;
+        border: 1px solid #fee2e2;
+        color: var(--error-color);
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .error-message::before {
+        content: '!';
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        background-color: var(--error-color);
+        color: white;
+        border-radius: 50%;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    @media (max-width: 640px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .form-grid .input-group:last-child {
+            grid-column: span 1;
+        }
+
+        .signup-container {
+            padding: 30px 20px;
+            margin: 15px;
+        }
+
+        .signup-header h1 {
+            font-size: 24px;
+        }
+
+        .logo-icon {
+            font-size: 40px;
+        }
+
+        .signup-header p {
+            font-size: 14px;
+        }
+
+        .input-group input,
+        .input-group select {
+            padding: 12px 12px 12px 40px;
+            font-size: 14px;
+        }
+
+        .input-group i {
+            font-size: 16px;
+        }
+
+        .signup-btn {
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .login-link a {
+            font-size: 14px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+    <div class="signup-header">
+        <i class="fas fa-user-plus logo-icon"></i>
+        <h1>Create Account</h1>
+        <p>Join Work Scholar and start your journey!</p>
+    </div>
+
+    <form method="post" action="{% url 'signup' %}">
+        {% csrf_token %}
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="error-message">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="form-grid">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" name="first_name" placeholder="First Name" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" name="last_name" placeholder="Last Name" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-id-card"></i>
+                <input type="text" name="student_id" placeholder="Student ID" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" name="phone" placeholder="Phone Number" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" name="email" placeholder="Email Address" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-graduation-cap"></i>
+                <select name="course" required>
+                    <option value="" disabled selected>Select Course</option>
+                    <option value="bsit">BS Information Technology</option>
+                    <option value="bscs">BS Computer Science</option>
+                    <option value="bsis">BS Information Systems</option>
+                    <option value="bsce">BS Computer Engineering</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            </div>
+        </div>
+
+        <button type="submit" class="signup-btn">Create Account</button>
+
+        <div class="login-link">
+            <a href="{% url 'login' %}">
+                <i class="fas fa-arrow-left"></i>
+                Already have an account? Login
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
