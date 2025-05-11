@@ -169,7 +169,6 @@
             box-shadow: 0 2px 4px rgba(108, 99, 255, 0.2);
         }
         
-        /*forgot password link*/
         .forgot-password {
             text-align: center;
             margin-top: 20px;
@@ -187,31 +186,6 @@
             color: var(--primary-hover);
         }
         
-        /* Create Account Link */
-        .sign_up {
-            text-align: center;
-            margin-top: 10px;
-        }
-        .sign_up a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-        .sign_up a:hover {
-            text-decoration: underline;
-            color: var(--primary-hover);
-        }
-        .error-message {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            font-size: 14px;
-            text-align: center;
-        }
-
         /* Footer Styles - Updated for better responsiveness */
         .footer {
             width: 100%;
@@ -644,10 +618,6 @@
             <div class="forgot-password">
                 <a href="{% url 'password_reset' %}">Forgot Password?</a>
             </div>
-
-            <div class="sign_up">
-                <a href="#">Sign Up</a>
-            </div>
         </form>
     </div>
 
@@ -674,13 +644,12 @@
                 <div class="footer-section links">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="landing.html">Home</a></li>
+                        <li><a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\landing.html">Home</a></li>
                         <li><a href="#">About Us</a></li>
                         <li><a href="#">Programs</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Support</a></li>
                         <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="{% url 'snake_game' %}">Play Snake</a></li>
                     </ul>
                 </div>
                 
@@ -720,36 +689,7 @@
                     });
                 }, 3000);
             }
-            // Footer toggle functionality for mobile
-        document.getElementById('footerToggle').addEventListener('click', function() {
-            const footer = document.getElementById('siteFooter');
-            
-            if (footer.classList.contains('footer-collapsed')) {
-                footer.classList.remove('footer-collapsed');
-                footer.classList.add('footer-expanded');
-            } else {
-                footer.classList.remove('footer-expanded');
-                footer.classList.add('footer-collapsed');
-            }
         });
-        
-        // Automatically set footer state based on screen size
-        function setInitialFooterState() {
-            const footer = document.getElementById('siteFooter');
-            if (window.innerWidth <= 768) {
-                footer.classList.add('footer-collapsed');
-                footer.classList.remove('footer-expanded');
-            } else {
-                footer.classList.remove('footer-collapsed');
-                footer.classList.add('footer-expanded');
-            }
-        }
-        
-        // Run on page load and resize
-        setInitialFooterState();
-        window.addEventListener('resize', setInitialFooterState);
-        });
-
     </script>
 </body>
 </html>
