@@ -27,7 +27,6 @@ urlpatterns = [
     path('login/', accounts_views.login_view, name='login'),
     path('logout/', accounts_views.custom_logout, name='logout'),
     path('', accounts_views.login_view, name='home'),
-    path('signup/', accounts_views.signup, name='signup'),  # Add signup URL pattern
     
     # Admin URLs
     path('admin/dashboard/', accounts_views.admin_dashboard, name='admin_dashboard'),
