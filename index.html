@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work Scholar Program</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <style>
         :root {
             --primary: #3b82f6;
@@ -29,7 +31,7 @@
         
         /* Header Styles - REVISED */
         header {
-            background-color: white;
+            background-color: rgb(255, 255, 255);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
@@ -58,8 +60,8 @@
         }
         
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 100px;
+            height: 100px;
             background-color: var(--primary);
             border-radius: 50%;
             display: flex;
@@ -228,7 +230,7 @@
         
         .btn {
             padding: 0.6rem 1.2rem;
-            border-radius: 50px;
+            border-radius: 12px;
             font-weight: 500;
             cursor: pointer;
             transition: var(--transition);
@@ -275,7 +277,7 @@
             min-height: 100vh;
             position: relative;
             overflow: hidden;
-            background-color: #f8fafc;
+            background-color: #d8ebff;
         }
         
         .hero-content {
@@ -302,7 +304,7 @@
         .hero-text p {
             font-size: 1.1rem;
             line-height: 1.6;
-            color: var(--gray);
+            color: var(--black);
             margin-bottom: 2rem;
             animation: fadeInUp 1s ease 0.2s both;
         }
@@ -314,7 +316,7 @@
         .hero-image img {
             width: 100%;
             border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(35, 124, 207, 0.918);
             animation: floatImage 4s ease-in-out infinite;
         }
         
@@ -358,7 +360,7 @@
         }
         
         .feature-card {
-            background-color: white;
+            background-color: rgb(140, 213, 255);
             border-radius: 10px;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -620,6 +622,16 @@
         }
         
         /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -804,14 +816,44 @@
                 transform: scale(0.95);
             }
         }
+
+    /* Scroll to Top Button */
+        #myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: rgb(41, 105, 189); /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 100px; /* Rounded corners */
+  font-size: 20px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 50px;
+  width: 75px;
+}
     </style>
 </head>
 <body>
     <header>
+
         <div class="nav-container">
-            <a href="#" class="logo">
-                <div class="logo-icon">WS</div>
-                <span>Work Scholar</span>
+            <a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\landing.html" class="logo">
+                <img src="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\img\wslogo.png" alt="Avatar" class="image">
+              <!--  <div class="logo-icon">WorkScholar</div>
+                <span>Work Scholar</span>-->
             </a>
             
             <div class="menu-toggle" id="menuToggle">
@@ -906,7 +948,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="/api/placeholder/600/400" alt="Students in work scholar program">
+                <img src="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\img\landing_1stimg-transparent.png" alt="Students in work scholar program">
             </div>
         </div>
     </section>
@@ -1079,6 +1121,188 @@
             <p>&copy; 2025 Work Scholar Program. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Mission Modal -->
+    <div id="missionModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Our Mission</h2>
+            <p>At WorkScholar, our mission is to empower students through meaningful work experiences while supporting their educational journey. We strive to:</p>
+            <ul>
+                <li>"To empower Work Scholar Students through holistic development, fostering academic excellence,</li>
+                <li>Provide financial support for education</li>
+                <li>Build bridges between academic learning and workplace skills</li>
+                <li>Foster a community of driven, ambitious scholars</li>
+                <li>Partner with organizations to create meaningful work experiences</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Team Modal -->
+    <div id="teamModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Our Team</h2>
+            <p>Meet the dedicated professionals behind the Work Scholar Program:</p>
+            <ul>
+                <li>
+                    <strong>Program Directors</strong>
+                    <p>Our experienced directors oversee program development and maintain high standards of excellence.</p>
+                </li>
+                <li>
+                    <strong>Academic Advisors</strong>
+                    <p>Specialized advisors help scholars balance their academic and work responsibilities.</p>
+                </li>
+                <li>
+                    <strong>Career Mentors</strong>
+                    <p>Industry professionals provide guidance and support throughout your work scholar journey.</p>
+                </li>
+                <li>
+                    <strong>Student Success Coordinators</strong>
+                    <p>Dedicated coordinators ensure scholars have the resources they need to thrive.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Success Stories Modal -->
+    <div id="testimonialsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Success Stories</h2>
+            <p>Read about the achievements of our Work Scholar alumni:</p>
+            <div class="testimonial">
+                <h3>Sarah Johnson</h3>
+                <p>"The Work Scholar Program gave me real-world experience in software development. Now I'm a senior developer at a leading tech company!"</p>
+            </div>
+            <div class="testimonial">
+                <h3>Michael Chen</h3>
+                <p>"Thanks to the program, I gained valuable research experience that helped me secure a full scholarship for my Ph.D. studies."</p>
+            </div>
+            <div class="testimonial">
+                <h3>Emily Rodriguez</h3>
+                <p>"Working as a teaching assistant through the program helped me discover my passion for education. I'm now pursuing a career in academic leadership."</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Partners Modal -->
+    <div id="partnersModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Partner Organizations</h2>
+            <p>We collaborate with leading organizations across various sectors:</p>
+            <ul>
+                <li>
+                    <strong>Academic Institutions</strong>
+                    <p>Partner universities and research centers providing scholarly opportunities.</p>
+                </li>
+                <li>
+                    <strong>Corporate Partners</strong>
+                    <p>Industry leaders offering professional work experiences and mentorship.</p>
+                </li>
+                <li>
+                    <strong>Non-Profit Organizations</strong>
+                    <p>Community organizations creating meaningful social impact opportunities.</p>
+                </li>
+                <li>
+                    <strong>Government Agencies</strong>
+                    <p>Public sector institutions offering exposure to civic and policy work.</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top">▲</button>
+
+    <style>
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 10px;
+        position: relative;
+        animation: slideIn 0.3s ease-in-out;
+    }
+
+    .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .close-modal:hover {
+        color: #000;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+        from { transform: translateY(-100px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-content h2 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+    }
+
+    .modal-content p {
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+
+    .modal-content ul {
+        list-style-type: disc;
+        margin-left: 20px;
+    }
+
+    .modal-content ul li {
+        margin-bottom: 0.5rem;
+        line-height: 1.4;
+    }
+
+    /* Additional Modal Styles */
+    .testimonial {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background-color: #f8fafc;
+        border-radius: 8px;
+    }
+
+    .testimonial h3 {
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .testimonial p {
+        font-style: italic;
+        color: #666;
+    }
+    </style>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1131,9 +1355,77 @@
             steps.forEach(step => {
                 stepObserver.observe(step);
             });
-        });
-    </script>               
+              // Modal functionality
+            const modalLinks = [
+                { link: 'a[href="#our-mission"]', modal: 'missionModal' },
+                { link: 'a[href="#our-team"]', modal: 'teamModal' },
+                { link: 'a[href="#testimonials"]', modal: 'testimonialsModal' },
+                { link: 'a[href="#partners"]', modal: 'partnersModal' }
+            ];
 
+            let currentModal = null;
+
+            // Set up modal triggers
+            modalLinks.forEach(item => {
+                const link = document.querySelector(item.link);
+                const modal = document.getElementById(item.modal);
+                const closeBtn = modal.querySelector('.close-modal');
+
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    modal.style.display = "block";
+                    document.body.style.overflow = "hidden";
+                    currentModal = modal;
+                });
+
+                closeBtn.addEventListener('click', function() {
+                    modal.style.display = "none";
+                    document.body.style.overflow = "auto";
+                    currentModal = null;
+                });
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (currentModal && e.target.classList.contains('modal')) {
+                    currentModal.style.display = "none";
+                    document.body.style.overflow = "auto";
+                    currentModal = null;
+                }
+            });
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "Escape" && currentModal) {
+                    currentModal.style.display = "none";
+                    document.body.style.overflow = "auto";
+                    currentModal = null;
+                }
+            });
+
+            // Get the button:
+        });
+
+        // Get the button:
+let mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+    </script>               
 
 
 </body>
