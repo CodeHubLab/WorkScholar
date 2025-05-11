@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Work-Study Application Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2 {
+            color: #003366;
+        }
+        
+        h1 {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #003366;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"], 
+        input[type="email"], 
+        input[type="tel"],
+        input[type="date"],
+        input[type="number"],
+        select, 
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        
+        .checkbox-group, .radio-group {
+            margin: 15px 0;
+        }
+        
+        .checkbox-group label, .radio-group label {
+            font-weight: normal;
+            display: inline;
+            margin-left: 5px;
+        }
+        
+        .checkbox-item, .radio-item {
+            margin: 5px 0;
+        }
+        
+        .required:after {
+            content: " *";
+            color: red;
+        }
+        
+        .hint {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+        
+        .file-upload {
+            margin: 15px 0;
+        }
+        
+        button {
+            background-color: #003366;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto;
+        }
+        
+        button:hover {
+            background-color: #004b99;
+        }
+        
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 3px;
+            display: none;
+        }
+        
+        @media screen and (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>University Work-Study Application Form</h1>
+    
+    <form id="workStudyForm">
+        <div class="section">
+            <h2>Personal Information</h2>
+            
+            <label for="fullName" class="required">Full Name</label>
+            <input type="text" id="fullName" name="fullName" required>
+            
+            <div style="display: flex; gap: 15px;">
+                <div style="flex: 1;">
+                    <label for="dob" class="required">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+                <div style="flex: 1;">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender">
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="non-binary">Non-binary</option>
+                        <option value="prefer-not">Prefer not to say</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            
+            <label for="address" class="required">Current Address</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+            
+            <div style="display: flex; gap: 15px;">
+                <div style="flex: 1;">
+                    <label for="email" class="required">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div style="flex: 1;">
+                    <label for="phone" class="required">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Academic Information</h2>
+            
+            <label for="studentId" class="required">Student ID</label>
+            <input type="text" id="studentId" name="studentId" required>
+            
+            <div style="display: flex; gap: 15px;">
+                <div style="flex: 1;">
+                    <label for="program" class="required">Degree Program</label>
+                    <select id="program" name="program" required>
+                        <option value="">Select program</option>
+                        <option value="bachelor">Bachelor's</option>
+                        <option value="master">Master's</option>
+                        <option value="phd">Ph.D.</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div style="flex: 1;">
+                    <label for="major" class="required">Major/Field of Study</label>
+                    <input type="text" id="major" name="major" required>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 15px;">
+                <div style="flex: 1;">
+                    <label for="year" class="required">Current Year of Study</label>
+                    <select id="year" name="year" required>
+                        <option value="">Select year</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                        <option value="5">5th Year</option>
+                        <option value="6+">6+ Year</option>
+                    </select>
+                </div>
+                <div style="flex: 1;">
+                    <label for="gpa" class="required">Current GPA</label>
+                    <input type="number" id="gpa" name="gpa" min="0" max="4.0" step="0.01" required>
+                    <div class="hint">On a 4.0 scale</div>
+                </div>
+            </div>
+            
+            <label for="enrollmentStatus" class="required">Enrollment Status</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="fullTime" name="enrollmentStatus" value="fullTime" required>
+                    <label for="fullTime">Full-time (12+ credit hours)</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="partTime" name="enrollmentStatus" value="partTime">
+                    <label for="partTime">Part-time (less than 12 credit hours)</label>
+                </div>
+            </div>
+            
+            <label for="expectedGrad" class="required">Expected Graduation Date</label>
+            <input type="date" id="expectedGrad" name="expectedGrad" required>
+        </div>
+        
+        <div class="section">
+            <h2>Work-Study Information</h2>
+            
+            <label for="financialAid" class="required">Are you receiving financial aid?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="aidYes" name="financialAid" value="yes" required>
+                    <label for="aidYes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="aidNo" name="financialAid" value="no">
+                    <label for="aidNo">No</label>
+                </div>
+            </div>
+            
+            <label for="federalWorkStudy" class="required">Are you eligible for Federal Work-Study?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="fwsYes" name="federalWorkStudy" value="yes" required>
+                    <label for="fwsYes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="fwsNo" name="federalWorkStudy" value="no">
+                    <label for="fwsNo">No</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="fwsUnsure" name="federalWorkStudy" value="unsure">
+                    <label for="fwsUnsure">Not sure</label>
+                </div>
+            </div>
+            
+            <label for="workExperience">Previous Work Experience</label>
+            <textarea id="workExperience" name="workExperience" rows="4"></textarea>
+            
+            <label for="skills">Relevant Skills</label>
+            <textarea id="skills" name="skills" rows="4" 
+                      placeholder="List skills relevant to the position (e.g., computer proficiency, customer service, laboratory techniques)"></textarea>
+            
+            <label for="availability" class="required">Weekly Availability</label>
+            <div class="checkbox-group">
+                <div class="hint">Select all days you're available to work</div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="monday" name="availability[]" value="monday">
+                    <label for="monday">Monday</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tuesday" name="availability[]" value="tuesday">
+                    <label for="tuesday">Tuesday</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="wednesday" name="availability[]" value="wednesday">
+                    <label for="wednesday">Wednesday</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="thursday" name="availability[]" value="thursday">
+                    <label for="thursday">Thursday</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="friday" name="availability[]" value="friday">
+                    <label for="friday">Friday</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="saturday" name="availability[]" value="saturday">
+                    <label for="saturday">Saturday</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="sunday" name="availability[]" value="sunday">
+                    <label for="sunday">Sunday</label>
+                </div>
+            </div>
+            
+            <label for="hoursPerWeek" class="required">Hours Available Per Week</label>
+            <select id="hoursPerWeek" name="hoursPerWeek" required>
+                <option value="">Select hours</option>
+                <option value="1-5">1-5 hours</option>
+                <option value="6-10">6-10 hours</option>
+                <option value="11-15">11-15 hours</option>
+                <option value="16-20">16-20 hours</option>
+                <option value="20+">20+ hours</option>
+            </select>
+            
+            <label for="positionPreference" class="required">Position Preferences</label>
+            <select id="positionPreference" name="positionPreference" required>
+                <option value="">Select position type</option>
+                <option value="administrative">Administrative/Office Assistant</option>
+                <option value="research">Research Assistant</option>
+                <option value="library">Library Assistant</option>
+                <option value="lab">Laboratory Assistant</option>
+                <option value="teaching">Teaching Assistant</option>
+                <option value="it">IT Support</option>
+                <option value="custodial">Custodial Services</option>
+                <option value="food">Food Services</option>
+                <option value="maintenance">Maintenance</option>
+                <option value="other">Other</option>
+            </select>
+            
+            <div id="otherPositionDiv" style="display: none;">
+                <label for="otherPosition">Please specify other position</label>
+                <input type="text" id="otherPosition" name="otherPosition">
+            </div>
+            
+            <label for="departmentPreference">Department Preference (if any)</label>
+            <input type="text" id="departmentPreference" name="departmentPreference">
+            
+            <label for="startDate" class="required">Preferred Start Date</label>
+            <input type="date" id="startDate" name="startDate" required>
+        </div>
+        
+        <div class="section">
+            <h2>Required Documents</h2>
+            <p>Please upload the following documents in PDF format:</p>
+            
+            <div class="file-upload">
+                <label for="resume" class="required">Resume/CV</label>
+                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+            </div>
+            
+            <div class="file-upload">
+                <label for="transcript" class="required">Current Academic Transcript</label>
+                <input type="file" id="transcript" name="transcript" accept=".pdf" required>
+            </div>
+            
+            <div class="file-upload">
+                <label for="scheduleImg">Current Class Schedule</label>
+                <input type="file" id="scheduleImg" name="scheduleImg" accept=".pdf,.jpg,.jpeg,.png">
+            </div>
+            
+            <div class="file-upload">
+                <label for="letterRef">Letter of Recommendation (optional)</label>
+                <input type="file" id="letterRef" name="letterRef" accept=".pdf,.doc,.docx">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Additional Information</h2>
+            
+            <label for="howHeard">How did you hear about this opportunity?</label>
+            <select id="howHeard" name="howHeard">
+                <option value="">Select option</option>
+                <option value="website">University Website</option>
+                <option value="email">Email Announcement</option>
+                <option value="advisor">Academic Advisor</option>
+                <option value="friend">Friend/Classmate</option>
+                <option value="flyer">Campus Flyer/Poster</option>
+                <option value="career">Career Center</option>
+                <option value="other">Other</option>
+            </select>
+            
+            <label for="additionalInfo">Additional Information</label>
+            <textarea id="additionalInfo" name="additionalInfo" rows="4" 
+                      placeholder="Any additional information you would like us to know"></textarea>
+        </div>
+        
+        <div class="section">
+            <h2>Certifications</h2>
+            
+            <div class="checkbox-item">
+                <input type="checkbox" id="certifyInfo" name="certifyInfo" required>
+                <label for="certifyInfo" class="required">I certify that all information provided is true and complete to the best of my knowledge.</label>
+            </div>
+            
+            <div class="checkbox-item">
+                <input type="checkbox" id="certifyEligibility" name="certifyEligibility" required>
+                <label for="certifyEligibility" class="required">I understand that to be eligible for work-study, I must maintain satisfactory academic progress and meet all university requirements.</label>
+            </div>
+            
+            <div class="checkbox-item">
+                <input type="checkbox" id="certifyAvailability" name="certifyAvailability" required>
+                <label for="certifyAvailability" class="required">I certify that if hired, I will notify my supervisor of any changes to my class schedule, enrollment status, or availability.</label>
+            </div>
+        </div>
+        
+        <button type="submit">Submit Application</button>
+    </form>
+
+    <script>
+        // Show "Other Position" field when "Other" is selected
+        document.getElementById('positionPreference').addEventListener('change', function() {
+            const otherDiv = document.getElementById('otherPositionDiv');
+            if (this.value === 'other') {
+                otherDiv.style.display = 'block';
+            } else {
+                otherDiv.style.display = 'none';
+            }
+        });
+        
+        // Form validation
+        document.getElementById('workStudyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple validation example - would expand in a real application
+            let valid = true;
+            const requiredFields = document.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    valid = false;
+                    // Show error message or highlight field
+                    field.style.borderColor = 'red';
+                } else {
+                    field.style.borderColor = '#ddd';
+                }
+            });
+            
+            // Check availability checkboxes (at least one day must be selected)
+            const availabilityChecked = document.querySelectorAll('input[name="availability[]"]:checked');
+            if (availabilityChecked.length === 0) {
+                valid = false;
+                document.querySelector('.checkbox-group').style.borderColor = 'red';
+                alert('Please select at least one day for your availability.');
+            }
+            
+            if (valid) {
+                alert('Form submitted successfully! In a real application, this would be sent to the work-study office.');
+                // In a real application, you would submit the form data here
+                // this.submit();
+            } else {
+                alert('Please fill in all required fields (marked with *)');
+            }
+        });
+    </script>
+</body>
+</html>
