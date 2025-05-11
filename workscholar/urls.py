@@ -35,7 +35,7 @@ urlpatterns = [
     path('admin/change-password/', accounts_views.change_password, name='change_password'),
     path('admin/update-login-background/', accounts_views.update_login_background, name='update_login_background'),
     path('admin/update-manager-background/', accounts_views.update_manager_background, name='update_manager_background'),
-    
+
     # Dashboard URLs - Note the admin dashboard URL is now before django-admin
     path('dashboard/', accounts_views.student_dashboard, name='student_dashboard'),
     path('supervisor/dashboard/', accounts_views.supervisor_dashboard, name='supervisor_dashboard'),
