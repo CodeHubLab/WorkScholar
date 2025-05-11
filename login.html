@@ -187,6 +187,16 @@
             background-color: #2c2c54;
             color: var(--white);
             padding: 15px 0;
+            text-align: center;
+            font-size: 14px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1); 
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
             margin-top: auto;
             transition: all 0.3s ease;
         }
@@ -572,85 +582,6 @@
     </style>
 </head>
 <body>
-<!--
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300">
-        <!-- Background Elements 
-        <defs>
-          <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#003366" />
-            <stop offset="100%" stop-color="#0066cc" />
-          </linearGradient>
-          <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-            <feOffset dx="2" dy="2" />
-            <feComponentTransfer>
-              <feFuncA type="linear" slope="0.3" />
-            </feComponentTransfer>
-            <feMerge>
-              <feMergeNode />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-        
-        <!-- Main Circle 
-        <circle cx="250" cy="150" r="120" fill="url(#bgGradient)" filter="url(#dropShadow)" />
-        
-        <!-- Connection Lines 
-        <g stroke="#ffffff" stroke-width="3" stroke-linecap="round">
-          <path d="M250,80 L250,220" stroke-opacity="0.6" />
-          <path d="M180,150 L320,150" stroke-opacity="0.6" />
-          <path d="M195,95 L305,205" stroke-opacity="0.6" />
-          <path d="M195,205 L305,95" stroke-opacity="0.6" />
-        </g>
-        
-        <!-- Data Points/Nodes 
-        <g fill="#ffffff">
-          <circle cx="250" cy="80" r="12" />
-          <circle cx="180" cy="150" r="12" />
-          <circle cx="250" cy="220" r="12" />
-          <circle cx="320" cy="150" r="12" />
-          <circle cx="195" cy="95" r="10" />
-          <circle cx="305" cy="95" r="10" />
-          <circle cx="195" cy="205" r="10" />
-          <circle cx="305" cy="205" r="10" />
-          <circle cx="250" cy="150" r="18" />
-        </g>
-        
-        <!-- Connection Pulses (Animation Effect) 
-        <g fill="#4fc3f7" opacity="0.7">
-          <circle cx="250" cy="80" r="6" />
-          <circle cx="180" cy="150" r="6" />
-          <circle cx="320" cy="150" r="6" />
-          <circle cx="250" cy="220" r="6" />
-          <circle cx="250" cy="150" r="10" />
-        </g>
-        
-        <!-- Digital Circuit Pattern 
-        <g stroke="#a7f3ff" stroke-width="1.5" fill="none" stroke-opacity="0.4">
-          <path d="M160,100 L190,100 L190,120 L220,120" />
-          <path d="M280,120 L310,120 L310,100 L340,100" />
-          <path d="M160,200 L190,200 L190,180 L220,180" />
-          <path d="M280,180 L310,180 L310,200 L340,200" />
-        </g>
-        
-        <!-- Text Elements 
-        <g filter="url(#dropShadow)">
-          <!-- ICTS Text 
-          <text x="250" y="260" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#ffffff" text-anchor="middle">ICTS</text>
-          
-          <!-- Full Name Text 
-          <text x="250" y="285" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle">Information Communication Service Technology</text>
-        </g>
-        
-        <!-- Binary Code Decoration 
-        <g fill="#ffffff" font-family="monospace" font-size="8" opacity="0.15">
-          <text x="140" y="70">010100</text>
-          <text x="330" y="70">110010</text>
-          <text x="140" y="240">101010</text>
-          <text x="330" y="240">010101</text>
-        </g>
-      </svg> -->
 
     <!-- Rest of the HTML content remains the same -->
     <div class="login-container">
@@ -803,7 +734,7 @@
             // Create and add error message
             const errorDiv = document.createElement('div');
             errorDiv.className = 'error-message';
-            errorDiv.style.color = '#ff3860';
+            errorDiv.style.color = '#FF0000';
             errorDiv.style.fontSize = '14px';
             errorDiv.style.marginTop = '5px';
             errorDiv.textContent = message;
