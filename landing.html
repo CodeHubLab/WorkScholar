@@ -881,7 +881,7 @@
                 </ul>
                 
                 <div class="mobile-nav-buttons">
-                    <a href="http://127.0.0.1:8000/login/" class="btn btn-outline">Log In</a>
+                    <a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\login.html" class="btn btn-outline">Log In</a>
                     <a href="#signup" class="btn btn-primary">Create Account</a>
                 </div>
             </div>
@@ -1136,5 +1136,1141 @@
 
 
 
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Scholar Program</title>
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles - REVISED */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* Hamburger Menu Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background-color: var(--dark);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+        
+        /* Main Navigation - REVISED */
+        .main-nav {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-item {
+            position: relative;
+            margin: 0 0.5rem;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        /* Dropdown Menu - REVISED */
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .dropdown-toggle::after {
+            content: '▼';
+            font-size: 0.7rem;
+            transition: var(--transition);
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 1002;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown:hover .dropdown-toggle::after {
+            transform: rotate(180deg);
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            padding-left: 2rem;
+        }
+        
+        /* Nested Dropdown - REVISED */
+        .nested-dropdown {
+            position: relative;
+        }
+        
+        .nested-dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nested-dropdown-toggle::after {
+            content: '▶';
+            font-size: 0.7rem;
+            transition: var(--transition);
+        }
+        
+        .nested-dropdown-menu {
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 0.5rem 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(10px);
+            transition: var(--transition);
+        }
+        
+        .nested-dropdown:hover .nested-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+        
+        .nested-dropdown:hover .nested-dropdown-toggle::after {
+            transform: rotate(90deg);
+        }
+        
+        /* Buttons */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-left: 2rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        /* Mobile Nav - REVISED */
+        .mobile-nav-menu {
+            display: none;
+        }
+        
+        .mobile-nav-buttons {
+            display: none;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 8rem 5% 5rem;
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background-color: #f8fafc;
+        }
+        
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .hero-text {
+            padding-right: 2rem;
+        }
+        
+        .hero-text h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--gray);
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            animation: floatImage 4s ease-in-out infinite;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            background-color: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            background-color: rgba(59, 130, 246, 0.1);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* Steps Section */
+        .steps {
+            padding: 5rem 5%;
+            background-color: #f8fafc;
+        }
+        
+        .steps-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .steps-list {
+            position: relative;
+            margin-top: 4rem;
+        }
+        
+        .steps-list::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: rgba(59, 130, 246, 0.3);
+        }
+        
+        .step {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .step-number {
+            background-color: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            flex-grow: 1;
+        }
+        
+        .step-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .step-content p {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 5rem 5%;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta .btn {
+            background-color: white;
+            color: var(--primary);
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .cta .btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .footer-about p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .footer-contact p {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .footer-copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes floatImage {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        
+        /* Mobile Responsive Styles - REVISED */
+        @media (max-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                text-align: center;
+                order: 2;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image {
+                order: 1;
+                margin-bottom: 2rem;
+            }
+            
+            .cta-buttons {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .main-nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 320px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 5rem 2rem 2rem;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                overflow-y: auto;
+                z-index: 1000;
+            }
+            
+            .main-nav.active {
+                right: 0;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .nav-item {
+                margin: 0;
+                width: 100%;
+            }
+            
+            .nav-link {
+                padding: 1rem 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+            
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                padding: 0;
+                width: 100%;
+            }
+            
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+            
+            .dropdown-toggle::after {
+                content: '+';
+            }
+            
+            .dropdown.active .dropdown-toggle::after {
+                content: '-';
+                transform: none;
+            }
+            
+            .dropdown-item {
+                padding: 1rem 0 1rem 1.5rem;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+            
+            .nested-dropdown-menu {
+                position: static;
+                box-shadow: none;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                padding: 0;
+            }
+            
+            .nested-dropdown.active .nested-dropdown-menu {
+                display: block;
+            }
+            
+            .nested-dropdown-toggle::after {
+                content: '+';
+            }
+            
+            .nested-dropdown.active .nested-dropdown-toggle::after {
+                content: '-';
+                transform: none;
+            }
+            
+            .nested-dropdown-item {
+                padding-left: 3rem;
+            }
+            
+            .nav-buttons {
+                display: none;
+            }
+            
+            .mobile-nav-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                margin-top: 2rem;
+            }
+            
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+            
+            .overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+        
+        /* For touch devices */
+        @media (hover: none) {
+            .feature-card:active {
+                transform: scale(0.98);
+            }
+            
+            .btn:active {
+                transform: scale(0.95);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">WS</div>
+                <span>Work Scholar</span>
+            </a>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <div class="main-nav" id="mainNav">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Home</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#about" class="nav-link dropdown-toggle">About <span class="arrow"></span></a>
+                        <div class="dropdown-menu">
+                            <a href="#our-mission" class="dropdown-item">Our Mission</a>
+                            <a href="#our-team" class="dropdown-item">Our Team</a>
+                            <a href="#testimonials" class="dropdown-item">Success Stories</a>
+                            <a href="#partners" class="dropdown-item">Partner Organizations</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#programs" class="nav-link dropdown-toggle">Programs <span class="arrow"></span></a>
+                        <div class="dropdown-menu">
+                            <a href="#undergrad" class="dropdown-item">Undergraduate Scholars</a>
+                            <a href="#graduate" class="dropdown-item">Graduate Scholars</a>
+                            <a href="#international" class="dropdown-item">International Scholars</a>
+                            <div class="nested-dropdown">
+                                <a href="#specialized" class="dropdown-item nested-dropdown-toggle">Specialized Programs</a>
+                                <div class="nested-dropdown-menu">
+                                    <a href="#summer" class="dropdown-item">Summer Opportunities</a>
+                                    <a href="#research" class="dropdown-item">Research Assistantships</a>
+                                    <a href="#teaching" class="dropdown-item">Teaching Assistantships</a>
+                                    <a href="#community" class="dropdown-item">Community Outreach</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\accounts\templates\login.html" class="nav-link dropdown-toggle">Apply <span class="arrow"></span></a>
+                        <div class="dropdown-menu">
+                            <a href="#eligibility" class="dropdown-item">Eligibility Criteria</a>
+                            <a href="#application-process" class="dropdown-item">Application Process</a>
+                            <a href="#required-docs" class="dropdown-item">Required Documents</a>
+                            <a href="#deadlines" class="dropdown-item">Important Deadlines</a>
+                            <a href="#faq" class="dropdown-item">FAQs</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a href="#resources" class="nav-link dropdown-toggle">Resources <span class="arrow"></span></a>
+                        <div class="dropdown-menu">
+                            <a href="#student-handbook" class="dropdown-item">Student Handbook</a>
+                            <a href="#forms" class="dropdown-item">Forms & Documents</a>
+                            <a href="#financial-info" class="dropdown-item">Financial Information</a>
+                            <a href="#academic-calendar" class="dropdown-item">Academic Calendar</a>
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                
+                <div class="mobile-nav-buttons">
+                    <a href="#login" class="btn btn-outline">Log In</a>
+                    <a href="#signup" class="btn btn-primary">Create Account</a>
+                </div>
+            </div>
+            
+            <div class="nav-buttons">
+                <a href="#login" class="btn btn-outline">Log In</a>
+                <a href="#signup" class="btn btn-primary">Create Account</a>
+            </div>
+        </div>
+        
+        <div class="overlay" id="overlay"></div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Shape Your Future with our Work Scholar Program</h1>
+                <p>Gain valuable work experience, develop professional skills, and earn while you learn. Our Work Scholar Program connects ambitious students with meaningful opportunities.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary">Apply Now</a>
+                    <a href="#learn-more" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="/api/placeholder/600/400" alt="Students in work scholar program">
+            </div>
+        </div>
+    </section>
+    
+    <section class="features" id="about">
+        <div class="section-header">
+            <h2>Why Choose Our Work Scholar Program</h2>
+            <p>Our program offers students a unique opportunity to gain real-world experience while earning financial support for their education.</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💼</div>
+                <h3>Work Experience</h3>
+                <p>Gain valuable professional experience in your field of study with hands-on projects and mentorship from industry professionals.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Financial Support</h3>
+                <p>Receive financial assistance to help cover your educational expenses, reducing the burden of student loans.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🌟</div>
+                <h3>Skill Development</h3>
+                <p>Develop critical professional skills like communication, problem-solving, and teamwork that employers value.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Networking</h3>
+                <p>Build meaningful connections with professionals and fellow scholars that can lead to future career opportunities.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📈</div>
+                <h3>Career Advancement</h3>
+                <p>Get a head start on your career path with experience that sets you apart from other graduates in the job market.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>Academic Growth</h3>
+                <p>Apply classroom knowledge to real-world scenarios, enhancing your understanding of your field of study.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="steps" id="requirements">
+        <div class="steps-container">
+            <div class="section-header">
+                <h2>How to Apply for the Work Scholar Program</h2>
+                <p>Follow these simple steps to start your journey as a Work Scholar.</p>
+            </div>
+            
+            <div class="steps-list">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Check Eligibility</h3>
+                        <p>Ensure you meet the program requirements: enrolled as a full-time student, maintaining a minimum GPA of 3.0, and having completed at least one semester of study.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Create an Account</h3>
+                        <p>Sign up on our portal to create your personal profile and access the application materials.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Complete Application</h3>
+                        <p>Fill out the online application form, including your academic information, work preferences, and a personal statement explaining why you're interested in the program.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class  ="step-content">
+                        <h3>Submit Required Documents</h3>
+                        <p>Upload your resume, transcripts, and any other required documents to support your application.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Interview Process</h3>
+                        <p>If selected, you will be invited for an interview with our program coordinators to discuss your application and fit for the program.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Receive Offer</h3>
+                        <p>If accepted, you will receive an official offer letter with details about your placement and next steps.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h3>Start Your Journey</h3>
+                        <p>Once you accept the offer, you will be ready to start your journey as a Work Scholar!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="learn-more">
+        <div class="cta-container">
+            <h2>Ready to Take the Next Step?</h2>
+            <p>Join our Work Scholar Program and unlock your potential. Apply today and start building your future!</p>
+            <a href="#apply" class="btn btn-primary">Apply Now</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <div class="footer-logo-icon">WS</div>
+                <span>Work Scholar</span>
+            </div>
+            
+            <div class="footer-about">
+                <p>Empowering students through work experience and financial support. Join us in shaping the future of education.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#programs">Programs</a></li>
+                    <li><a href="#requirements">Requirements</a></li>
+                    <li><a href="#testimonials">Success Stories</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Application Guide</a></li>
+                    <li><a href="#">Student Handbook</a></li>
+                    <li><a href="#">Financial Information</a></li>
+                    <li><a href="#">Academic Calendar</a></li>
+                    <li><a href="#">Department Directory</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><i>📍</i> 123 University Avenue, Campus Building 4</p>
+                <p><i>📞</i> (555) 123-4567</p>
+                <p><i>✉️</i> workscholar@university.edu</p>
+                <p><i>⏰</i> Mon-Fri: 9:00 AM - 5:00 PM</p>
+            </div>
+        </div>
+        
+        <div class="footer-copyright">
+            <p>&copy; 2025 Work Scholar Program. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu Toggle Functionality
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                
+                // Animate hamburger to X
+                const spans = menuToggle.querySelectorAll('span');
+                spans.forEach(span => span.classList.toggle('active'));
+                
+                if (mainNav.classList.contains('active')) {
+                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    spans[1].style.opacity = '0';
+                    spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                } else {
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            });
+            
+            // Mobile dropdown functionality
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        this.classList.toggle('active');
+                    }
+                });
+            });
+            
+            // Scroll animation for steps
+            const steps = document.querySelectorAll('.step');
+            const stepObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        stepObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            steps.forEach(step => {
+                stepObserver.observe(step);
+            });
+        });
+    </script>               
+
+
+
