@@ -20,7 +20,6 @@ from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from accounts import views as accounts_views
-from accounts.forms import CustomPasswordResetForm, CustomSetPasswordForm
 
 urlpatterns = [
     path('django-admin/', admin.site.urls),  # Changed from 'admin/' to 'django-admin/'
@@ -41,7 +40,6 @@ urlpatterns = [
     path('dashboard/', accounts_views.student_dashboard, name='student_dashboard'),
     path('supervisor/dashboard/', accounts_views.supervisor_dashboard, name='supervisor_dashboard'),
     path('director/dashboard/', accounts_views.director_dashboard, name='director_dashboard'),
-    path('snake/', accounts_views.snake_game, name='snake_game'),  # Add this new URL pattern
     
     # Timesheet management URLs
     path('timesheet/submit/', accounts_views.submit_timesheet, name='submit_timesheet'),
@@ -50,21 +48,14 @@ urlpatterns = [
     
     # Password Reset URLs
     path('password_reset/', auth_views.PasswordResetView.as_view(
-        template_name='password_reset.html',
-        form_class=CustomPasswordResetForm,
-        success_url='/password_reset/done/'
+        template_name='password_reset.html'
     ), name='password_reset'),
-    
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(
         template_name='password_reset_done.html'
     ), name='password_reset_done'),
-    
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
-        template_name='password_reset_confirm.html',
-        form_class=CustomSetPasswordForm,
-        success_url='/reset/done/'
+        template_name='password_reset_confirm.html'
     ), name='password_reset_confirm'),
-    
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(
         template_name='password_reset_complete.html'
     ), name='password_reset_complete'),
