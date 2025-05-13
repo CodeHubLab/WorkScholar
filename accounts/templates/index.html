@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\img\wsplogo.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work Scholar Program</title>
@@ -31,7 +32,7 @@
         
         /* Header Styles - REVISED */
         header {
-            background-color: rgb(255, 255, 255);
+            background-color: rgb(217 227 249);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
@@ -330,7 +331,7 @@
         /* Features Section */
         .features {
             padding: 5rem 5%;
-            background-color: white;
+            background-color: #f2fff3;
         }
         
         .section-header {
@@ -360,7 +361,7 @@
         }
         
         .feature-card {
-            background-color: rgb(140, 213, 255);
+            background-color: rgba(194, 218, 255, 0.466);
             border-radius: 10px;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -449,7 +450,7 @@
         }
         
         .step-content {
-            background-color: white;
+            background-color: rgb(224 242 247);
             border-radius: 10px;
             padding: 2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -470,7 +471,7 @@
         /* CTA Section */
         .cta {
             padding: 5rem 5%;
-            background-color: var(--primary);
+            background-color: #6fa1f3;
             color: white;
             text-align: center;
         }
@@ -841,8 +842,8 @@
 img {
   border: 1px solid #ddd;
   border-radius: 4px;
-  padding: 50px;
-  width: 75px;
+  padding: 5px;
+  width: 80px;
 }
     </style>
 </head>
@@ -850,8 +851,8 @@ img {
     <header>
 
         <div class="nav-container">
-            <a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\landing.html" class="logo">
-                <img src="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\img\wslogo.png" alt="Avatar" class="image">
+            <a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\accounts\templates\index.html" class="logo">
+                <img src="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\img\auplogo-removebg-preview.png" alt="Avatar" class="image">
               <!--  <div class="logo-icon">WorkScholar</div>
                 <span>Work Scholar</span>-->
             </a>
@@ -863,9 +864,8 @@ img {
             </div>
             
             <div class="main-nav" id="mainNav">
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Home</a>
+                <ul class="nav-menu">                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
                     </li>
                     
                     <li class="nav-item dropdown">
@@ -923,13 +923,13 @@ img {
                 </ul>
                 
                 <div class="mobile-nav-buttons">
-                    <a href="http://127.0.0.1:8000/login/" class="btn btn-outline">Log In</a>
+                    <a href="login.html" class="btn btn-outline">Log In</a>
                     <a href="#signup" class="btn btn-primary">Create Account</a>
                 </div>
             </div>
             
             <div class="nav-buttons">
-                <a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\login.html" class="btn btn-outline">Log In</a>
+                <a href="login.html" class="btn btn-outline">Log In</a>
                 <a href="#signup" class="btn btn-primary">Create Account</a>
             </div>
         </div>
@@ -943,7 +943,7 @@ img {
                 <h1>Shape Your Future with our Work Scholar Program</h1>
                 <p>Gain valuable work experience, develop professional skills, and earn while you learn. Our Work Scholar Program connects ambitious students with meaningful opportunities.</p>
                 <div class="cta-buttons">
-                    <a href="#" class="btn btn-primary">Apply Now</a>
+                    <a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\accounts\templates\application.html" class="btn btn-primary">Apply Now</a>
                     <a href="#learn-more" class="btn btn-outline">Learn More</a>
                 </div>
             </div>
@@ -1069,7 +1069,7 @@ img {
         <div class="cta-container">
             <h2>Ready to Take the Next Step?</h2>
             <p>Join our Work Scholar Program and unlock your potential. Apply today and start building your future!</p>
-            <a href="#apply" class="btn btn-primary">Apply Now</a>
+            <a href="C:\Users\ICTS-TECH-TEST2\Documents\GitHub\WorkScholar\accounts\templates\application.html" class="btn btn-primary">Apply Now</a>
         </div>
     </section>
 
@@ -1087,7 +1087,7 @@ img {
             <div class="footer-links">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#programs">Programs</a></li>
                     <li><a href="#requirements">Requirements</a></li>
@@ -1120,21 +1120,69 @@ img {
         <div class="footer-copyright">
             <p>&copy; 2025 Work Scholar Program. All rights reserved.</p>
         </div>
-    </footer>
-
-    <!-- Mission Modal -->
+    </footer>    <!-- Mission Modal -->
     <div id="missionModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <h2>Our Mission</h2>
-            <p>At WorkScholar, our mission is to empower students through meaningful work experiences while supporting their educational journey. We strive to:</p>
-            <ul>
-                <li>"To empower Work Scholar Students through holistic development, fostering academic excellence,</li>
-                <li>Provide financial support for education</li>
-                <li>Build bridges between academic learning and workplace skills</li>
-                <li>Foster a community of driven, ambitious scholars</li>
-                <li>Partner with organizations to create meaningful work experiences</li>
-            </ul>
+            <div class="mission-content">
+                <section class="mission-section">
+                    <h2>Mission</h2>
+                    <div class="mission-text">
+                        <p>"To empower Work Scholar Students through holistic development, fostering academic excellence,
+                        professional growth, and ethical leadership. We are committed to providing a supportive environment that
+                        bridges education and real-world experience, equipping scholars with the skills, resilience, and values needed
+                        to thrive in their careers and contribute meaningfully to society."</p>
+                    </div>
+                </section>
+
+                <section class="mission-section">
+                    <h2>Vision</h2>
+                    <div class="mission-text">
+                        <p>"To be a transformative force in shaping Work Scholar Students into globally competitive, socially
+                        responsible, and purpose-driven professionals. We envision a community where scholars seamlessly integrate
+                        learning, service, and innovation to become leaders in their fields and catalysts for positive change."</p>
+                    </div>
+                </section>
+
+                <section class="mission-section">
+                    <h2>Philosophy</h2>
+                    <div class="mission-text">
+                        <p>"We believe in the power of education coupled with hands-on experience to unlock potential. Our philosophy
+                        is rooted in:</p>
+                        <ul class="philosophy-list">
+                            <li>Integrity & Accountability</li>
+                            <li>Lifelong Learning</li>
+                            <li>Service & Collaboration</li>
+                            <li>Resilience & Grit</li>
+                            <li>Balance & Well-being</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="mission-section">
+                    <h2>Core Values</h2>
+                    <div class="mission-text">
+                        <div class="value-grid">
+                            <div class="value-item">
+                                <h3>Excellence</h3>
+                                <p>Striving for the highest standards in academic and professional endeavors</p>
+                            </div>
+                            <div class="value-item">
+                                <h3>Innovation</h3>
+                                <p>Fostering creative thinking and innovative solutions</p>
+                            </div>
+                            <div class="value-item">
+                                <h3>Integrity</h3>
+                                <p>Maintaining ethical standards and professional conduct</p>
+                            </div>
+                            <div class="value-item">
+                                <h3>Collaboration</h3>
+                                <p>Working together to achieve common goals</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     </div>
 
@@ -1213,6 +1261,363 @@ img {
         </div>
     </div>
 
+    <!-- Programs Modals -->
+    <div id="undergradModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Undergraduate Scholars</h2>
+            <p>Our undergraduate program offers valuable opportunities for college students:</p>
+            <ul>
+                <li><strong>Part-time Work Opportunities</strong>
+                    <p>20-25 hours per week of meaningful work experience in your field of study</p>
+                </li>
+                <li><strong>Financial Support</strong>
+                    <p>Competitive hourly rates and potential tuition assistance</p>
+                </li>
+                <li><strong>Professional Development</strong>
+                    <p>Regular workshops, training sessions, and networking events</p>
+                </li>
+                <li><strong>Academic Integration</strong>
+                    <p>Work schedules that complement your academic commitments</p>
+                </li>
+            </div>
+        </div>
+
+    <div id="graduateModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Graduate Scholars</h2>
+            <p>Advanced opportunities for graduate students:</p>
+            <ul>
+                <li><strong>Research Positions</strong>
+                    <p>Work alongside faculty on cutting-edge research projects</p>
+                </li>
+                <li><strong>Teaching Opportunities</strong>
+                    <p>Gain valuable teaching experience as a teaching assistant</p>
+                </li>
+                <li><strong>Enhanced Stipend</strong>
+                    <p>Competitive compensation package for graduate-level work</p>
+                </li>
+                <li><strong>Professional Network</strong>
+                    <p>Connect with industry professionals and academic experts</p>
+                </li>
+            </div>
+        </div>
+
+    <div id="internationalModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>International Scholars</h2>
+            <p>Specialized support for international students:</p>
+            <ul>
+                <li><strong>Visa Support</strong>
+                    <p>Guidance with work authorization and visa requirements</p>
+                </li>
+                <li><strong>Cultural Integration</strong>
+                    <p>Programs to help you adapt to campus life and local culture</p>
+                </li>
+                <li><strong>Language Support</strong>
+                    <p>Access to language resources and ESL programs if needed</p>
+                </li>
+                <li><strong>Global Network</strong>
+                    <p>Connect with other international scholars and alumni</p>
+                </li>
+            </div>
+        </div>
+
+    <!-- Apply Modals -->
+    <div id="eligibilityModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Eligibility Criteria</h2>
+            <p>Basic requirements for the Work Scholar Program:</p>
+            <ul>
+                <li><strong>Academic Standing</strong>
+                    <p>Minimum GPA of 3.0 on a 4.0 scale</p>
+                </li>
+                <li><strong>Enrollment Status</strong>
+                    <p>Full-time enrollment in a degree program</p>
+                </li>
+                <li><strong>Academic Progress</strong>
+                    <p>Completion of at least one semester of study</p>
+                </li>
+                <li><strong>Time Commitment</strong>
+                    <p>Ability to work 15-25 hours per week</p>
+                </li>
+            </div>
+        </div>
+
+    <div id="applicationProcessModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Application Process</h2>
+            <p>Steps to apply for the Work Scholar Program:</p>
+            <ol>
+                <li>Create an account on our portal</li>
+                <li>Complete the online application form</li>
+                <li>Submit required documentation</li>
+                <li>Complete skills assessment (if required)</li>
+                <li>Participate in interviews</li>
+                <li>Receive decision notification</li>
+            </ol>
+            <p>The typical application process takes 2-3 weeks to complete.</p>
+        </div>
+    </div>
+
+    <div id="requiredDocsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Required Documents</h2>
+            <p>Please prepare the following documents for your application:</p>
+            <ul>
+                <li><strong>Academic Records</strong>
+                    <p>Official transcripts and current enrollment verification</p>
+                </li>
+                <li><strong>Identification</strong>
+                    <p>Government-issued photo ID and student ID</p>
+                </li>
+                <li><strong>Resume/CV</strong>
+                    <p>Updated resume highlighting relevant skills and experience</p>
+                </li>
+                <li><strong>Letters of Recommendation</strong>
+                    <p>Two letters from academic or professional references</p>
+                </li>
+                <li><strong>Personal Statement</strong>
+                    <p>Essay explaining your interest and goals in the program</p>
+                </li>
+                <li><strong>Financial Documentation</strong>
+                    <p>Financial aid forms and relevant financial statements</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="deadlinesModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Important Deadlines</h2>
+            <ul>
+                <li><strong>Fall Semester</strong>
+                    <p>Application Opens: March 1<br>
+                    Priority Deadline: May 1<br>
+                    Final Deadline: July 15</p>
+                </li>
+                <li><strong>Spring Semester</strong>
+                    <p>Application Opens: September 1<br>
+                    Priority Deadline: October 15<br>
+                    Final Deadline: December 1</p>
+                </li>
+                <li><strong>Summer Programs</strong>
+                    <p>Application Opens: January 15<br>
+                    Priority Deadline: March 1<br>
+                    Final Deadline: April 15</p>
+                </li>
+                <li><strong>Document Submission</strong>
+                    <p>All required documents must be submitted within two weeks of application submission</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="faqModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-section">
+                <h3>General Questions</h3>
+                <ul>
+                    <li><strong>How many hours can I work?</strong>
+                        <p>Work scholars typically work 15-25 hours per week during academic terms.</p>
+                    </li>
+                    <li><strong>Can international students apply?</strong>
+                        <p>Yes, international students with valid student visas are eligible to apply.</p>
+                    </li>
+                    <li><strong>Is previous work experience required?</strong>
+                        <p>No, but relevant experience or skills may strengthen your application.</p>
+                    </li>
+                </ul>
+
+                <h3>Financial Questions</h3>
+                <ul>
+                    <li><strong>How are work scholars paid?</strong>
+                        <p>Bi-weekly direct deposits based on hours worked.</p>
+                    </li>
+                    <li><strong>Does this affect other financial aid?</strong>
+                        <p>Work scholar earnings may impact your overall financial aid package. Consult with financial aid office.</p>
+                    </li>
+                </ul>
+
+                <h3>Program Requirements</h3>
+                <ul>
+                    <li><strong>Can I work in multiple departments?</strong>
+                        <p>Yes, with approval from program coordinators and department supervisors.</p>
+                    </li>
+                    <li><strong>What if my GPA drops?</strong>
+                        <p>Academic support and probation periods are available, but maintaining minimum GPA is required.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Resources Section Modals -->
+    <div id="formsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Forms & Documents</h2>
+            <ul>
+                <li><strong>Employment Forms</strong>
+                    <ul>
+                        <li>Work Scholar Agreement</li>
+                        <li>Tax Forms (W-4, I-9)</li>
+                        <li>Direct Deposit Authorization</li>
+                        <li>Emergency Contact Information</li>
+                    </ul>
+                </li>
+                <li><strong>Program Documents</strong>
+                    <ul>
+                        <li>Work Schedule Template</li>
+                        <li>Monthly Progress Report Form</li>
+                        <li>Supervisor Evaluation Form</li>
+                        <li>Leave Request Form</li>
+                    </ul>
+                </li>
+                <li><strong>Policy Documents</strong>
+                    <ul>
+                        <li>Code of Conduct</li>
+                        <li>Workplace Safety Guidelines</li>
+                        <li>Confidentiality Agreement</li>
+                        <li>Student Rights and Responsibilities</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>All forms are available for download through your Work Scholar Portal or from the program office.</p>
+        </div>
+    </div>
+
+    <div id="academicCalendarModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Academic Calendar</h2>
+            <div class="calendar-section">
+                <h3>Fall Semester</h3>
+                <ul>
+                    <li><strong>Orientation & Training:</strong> August 15-19</li>
+                    <li><strong>Work Period Begins:</strong> August 22</li>
+                    <li><strong>Mid-semester Evaluations:</strong> October 10-14</li>
+                    <li><strong>Work Period Ends:</strong> December 16</li>
+                </ul>
+
+                <h3>Spring Semester</h3>
+                <ul>
+                    <li><strong>Orientation (New Scholars):</strong> January 10-13</li>
+                    <li><strong>Work Period Begins:</strong> January 17</li>
+                    <li><strong>Mid-semester Evaluations:</strong> March 6-10</li>
+                    <li><strong>Work Period Ends:</strong> May 12</li>
+                </ul>
+
+                <h3>Summer Session</h3>
+                <ul>
+                    <li><strong>Summer Training:</strong> May 22-26</li>
+                    <li><strong>Work Period Begins:</strong> May 30</li>
+                    <li><strong>Mid-summer Evaluations:</strong> July 3-7</li>
+                    <li><strong>Work Period Ends:</strong> August 4</li>
+                </ul>
+
+                <p><em>Note: Dates may vary slightly by department. Check with your supervisor for specific scheduling details.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Specialized Programs Modals -->
+    <div id="summerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Summer Opportunities</h2>
+            <p>Enhance your summer with valuable work experience:</p>
+            <ul>
+                <li><strong>Summer Research Programs</strong>
+                    <p>Join faculty-led research projects during the summer months</p>
+                </li>
+                <li><strong>Industry Internships</strong>
+                    <p>Work with our partner organizations in your field of interest</p>
+                </li>
+                <li><strong>Summer Teaching</strong>
+                    <p>Support summer academic programs and gain teaching experience</p>
+                </li>
+                <li><strong>Flexible Schedule</strong>
+                    <p>Full-time opportunities available during summer break</p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="researchModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Research Assistantships</h2>
+            <p>Contribute to groundbreaking research projects:</p>
+            <ul>
+                <li><strong>Faculty Collaboration</strong>
+                    <p>Work directly with leading researchers in your field</p>
+                </li>
+                <li><strong>Research Skills</strong>
+                    <p>Learn advanced research methodologies and techniques</p>
+                </li>
+                <li><strong>Publication Opportunities</strong>
+                    <p>Contribute to academic papers and research publications</p>
+                </li>
+                <li><strong>Conference Participation</strong>
+                    <p>Present research findings at academic conferences</p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="teachingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Teaching Assistantships</h2>
+            <p>Develop your teaching and leadership skills:</p>
+            <ul>
+                <li><strong>Classroom Support</strong>
+                    <p>Assist professors with course instruction and materials</p>
+                </li>
+                <li><strong>Student Mentoring</strong>
+                    <p>Help students understand complex course concepts</p>
+                </li>
+                <li><strong>Grading & Feedback</strong>
+                    <p>Evaluate student work and provide constructive feedback</p>
+                </li>
+                <li><strong>Office Hours</strong>
+                    <p>Hold consultation hours to support student learning</p>
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div id="communityModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Community Outreach</h2>
+            <p>Make a difference in your community:</p>
+            <ul>
+                <li><strong>Community Programs</strong>
+                    <p>Support local initiatives and educational programs</p>
+                </li>
+                <li><strong>Volunteer Coordination</strong>
+                    <p>Help organize and manage community service events</p>
+                </li>
+                <li><strong>Educational Outreach</strong>
+                    <p>Participate in tutoring and mentoring programs</p>
+                </li>
+                <li><strong>Social Impact</strong>
+                    <p>Contribute to meaningful community development projects</p>
+                </li>
+            </div>
+        </div>
+    </div>
+    
     <button onclick="topFunction()" id="myBtn" title="Go to top">▲</button>
 
     <style>
@@ -1227,18 +1632,34 @@ img {
         height: 100%;
         background-color: rgba(0,0,0,0.5);
         animation: fadeIn 0.3s ease-in-out;
-    }
-
-    .modal-content {
+    }    .modal-content {
         background-color: #fefefe;
-        margin: 15% auto;
+        margin: 5% auto;
         padding: 20px;
         border: 1px solid #888;
         width: 80%;
         max-width: 600px;
+        max-height: 80vh;
         border-radius: 10px;
         position: relative;
         animation: slideIn 0.3s ease-in-out;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary) #f0f0f0;
+    }
+    
+    .modal-content::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .modal-content::-webkit-scrollbar-track {
+        background: #f0f0f0;
+        border-radius: 4px;
+    }
+    
+    .modal-content::-webkit-scrollbar-thumb {
+        background-color: var(--primary);
+        border-radius: 4px;
     }
 
     .close-modal {
@@ -1284,149 +1705,226 @@ img {
         line-height: 1.4;
     }
 
-    /* Additional Modal Styles */
-    .testimonial {
-        margin-bottom: 1.5rem;
-        padding: 1rem;
-        background-color: #f8fafc;
-        border-radius: 8px;
+    /* Mission Modal Specific Styles */
+    .mission-content {
+        padding-right: 10px;
     }
 
-    .testimonial h3 {
+    .mission-section {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .mission-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .mission-text {
+        margin-top: 1rem;
+    }
+
+    .philosophy-list {
+        margin-top: 1rem;
+        padding-left: 2rem;
+    }
+
+    .philosophy-list li {
+        margin-bottom: 0.5rem;
+        position: relative;
+    }
+
+    .philosophy-list li:before {
+        content: "•";
+        color: var(--primary);
+        font-weight: bold;
+        position: absolute;
+        left: -1rem;
+    }
+
+    .value-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .value-item {
+        background: #f8fafc;
+        padding: 1.5rem;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .value-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .value-item h3 {
         color: var(--primary);
         margin-bottom: 0.5rem;
         font-size: 1.1rem;
     }
 
-    .testimonial p {
-        font-style: italic;
-        color: #666;
+    .value-item p {
+        font-size: 0.9rem;
+        color: var(--gray);
+        margin: 0;
     }
-    </style>
-    
-    <script>
+
+    @media (max-width: 768px) {
+        .value-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>    <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Menu Toggle Functionality
-            const menuToggle = document.getElementById('menuToggle');
-            const mainNav = document.getElementById('mainNav');
+            // Initialize all page functionality
+            setupModals();
+            setupMobileMenu();
+            setupScrollAnimations();
+            setupScrollToTop();
             
-            menuToggle.addEventListener('click', function() {
-                mainNav.classList.toggle('active');
+            function setupScrollToTop() {
+                let mybutton = document.getElementById("myBtn");
+                window.onscroll = function() {
+                    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                        mybutton.style.display = "block";
+                    } else {
+                        mybutton.style.display = "none";
+                    }
+                };
+            }
+            
+            function setupMobileMenu() {
+                const menuToggle = document.getElementById('menuToggle');
+                const mainNav = document.getElementById('mainNav');
                 
-                // Animate hamburger to X
-                const spans = menuToggle.querySelectorAll('span');
-                spans.forEach(span => span.classList.toggle('active'));
-                
-                if (mainNav.classList.contains('active')) {
-                    spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                    spans[1].style.opacity = '0';
-                    spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
-                } else {
-                    spans[0].style.transform = 'none';
-                    spans[1].style.opacity = '1';
-                    spans[2].style.transform = 'none';
-                }
-            });
-            
-            // Mobile dropdown functionality
-            const dropdowns = document.querySelectorAll('.dropdown');
-            
-            dropdowns.forEach(dropdown => {
-                dropdown.addEventListener('click', function(e) {
-                    if (window.innerWidth <= 768) {
-                        e.preventDefault();
-                        this.classList.toggle('active');
+                menuToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    const spans = menuToggle.querySelectorAll('span');
+                    spans.forEach(span => span.classList.toggle('active'));
+
+                    if (mainNav.classList.contains('active')) {
+                        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                        spans[1].style.opacity = '0';
+                        spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                    } else {
+                        spans[0].style.transform = 'none';
+                        spans[1].style.opacity = '1';
+                        spans[2].style.transform = 'none';
                     }
                 });
-            });
+                
+                const dropdowns = document.querySelectorAll('.dropdown');
+                dropdowns.forEach(dropdown => {
+                    dropdown.addEventListener('click', function(e) {
+                        if (window.innerWidth <= 768) {
+                            e.preventDefault();
+                            this.classList.toggle('active');
+                        }
+                    });
+                });
+            }
             
-            // Scroll animation for steps
-            const steps = document.querySelectorAll('.step');
-            const stepObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        stepObserver.unobserve(entry.target);
+            function setupScrollAnimations() {
+                const steps = document.querySelectorAll('.step');
+                const stepObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            stepObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                steps.forEach(step => {
+                    stepObserver.observe(step);
+                });
+            }
+            
+            function setupModals() {
+                const modalConfigs = {
+                    'our-mission': 'missionModal',
+                    'our-team': 'teamModal',
+                    'testimonials': 'testimonialsModal',
+                    'partners': 'partnersModal',
+                    'undergrad': 'undergradModal',
+                    'graduate': 'graduateModal',
+                    'international': 'internationalModal',
+                    'summer': 'summerModal',
+                    'research': 'researchModal',
+                    'teaching': 'teachingModal',
+                    'community': 'communityModal',
+                    'eligibility': 'eligibilityModal',
+                    'application-process': 'applicationProcessModal',
+                    'required-docs': 'requiredDocsModal',
+                    'deadlines': 'deadlinesModal',
+                    'faq': 'faqModal',
+                    'student-handbook': 'studentHandbookModal',
+                    'forms': 'formsModal',
+                    'financial-info': 'financialInfoModal',
+                    'academic-calendar': 'academicCalendarModal',
+                    'contact': 'contactModal'
+                };
+
+                let activeModal = null;
+
+                // Set up modal triggers
+                Object.entries(modalConfigs).forEach(([linkId, modalId]) => {
+                    const link = document.querySelector(`a[href="#${linkId}"]`);
+                    const modal = document.getElementById(modalId);
+                    if (link && modal) {
+                        const closeBtn = modal.querySelector('.close-modal');
+                        
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            modal.style.display = "block";
+                            document.body.style.overflow = "hidden";
+                            activeModal = modal;
+                        });
+
+                        closeBtn.addEventListener('click', function() {
+                            modal.style.display = "none";
+                            document.body.style.overflow = "auto";
+                            activeModal = null;
+                        });
                     }
                 });
-            }, { threshold: 0.1 });
 
-            steps.forEach(step => {
-                stepObserver.observe(step);
-            });
-              // Modal functionality
-            const modalLinks = [
-                { link: 'a[href="#our-mission"]', modal: 'missionModal' },
-                { link: 'a[href="#our-team"]', modal: 'teamModal' },
-                { link: 'a[href="#testimonials"]', modal: 'testimonialsModal' },
-                { link: 'a[href="#partners"]', modal: 'partnersModal' }
-            ];
-
-            let currentModal = null;
-
-            // Set up modal triggers
-            modalLinks.forEach(item => {
-                const link = document.querySelector(item.link);
-                const modal = document.getElementById(item.modal);
-                const closeBtn = modal.querySelector('.close-modal');
-
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    modal.style.display = "block";
-                    document.body.style.overflow = "hidden";
-                    currentModal = modal;
+                // Close modal when clicking outside
+                window.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('modal')) {
+                        e.target.style.display = "none";
+                        document.body.style.overflow = "auto";
+                        activeModal = null;
+                    }
                 });
 
-                closeBtn.addEventListener('click', function() {
-                    modal.style.display = "none";
-                    document.body.style.overflow = "auto";
-                    currentModal = null;
+                // Close modal with Escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === "Escape" && activeModal) {
+                        activeModal.style.display = "none";
+                        document.body.style.overflow = "auto";
+                        activeModal = null;
+                    }
                 });
-            });
+            }
 
-            // Close modal when clicking outside
-            window.addEventListener('click', function(e) {
-                if (currentModal && e.target.classList.contains('modal')) {
-                    currentModal.style.display = "none";
-                    document.body.style.overflow = "auto";
-                    currentModal = null;
-                }
-            });
-
-            // Close modal with Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === "Escape" && currentModal) {
-                    currentModal.style.display = "none";
-                    document.body.style.overflow = "auto";
-                    currentModal = null;
-                }
-            });
-
-            // Get the button:
+            // Scroll to top function
+            window.topFunction = function() {
+                document.body.scrollTop = 0; // For Safari
+                document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            };
         });
-
-        // Get the button:
-let mybutton = document.getElementById("myBtn");
-
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
-
-function scrollFunction() {
-  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
-}
-
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-  document.body.scrollTop = 0; // For Safari
-  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-}
     </script>               
 
 
 </body>
 </html>
+
+
+
