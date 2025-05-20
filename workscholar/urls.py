@@ -21,6 +21,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from accounts import views as accounts_views
 
+
+
 urlpatterns = [
     path('django-admin/', admin.site.urls),  # Changed from 'admin/' to 'django-admin/'
     path('login/', accounts_views.login_view, name='login'),
@@ -35,11 +37,14 @@ urlpatterns = [
     path('admin/change-password/', accounts_views.change_password, name='change_password'),
     path('admin/update-login-background/', accounts_views.update_login_background, name='update_login_background'),
     path('admin/update-manager-background/', accounts_views.update_manager_background, name='update_manager_background'),
+    path('approval-status/', accounts_views.approval_status, name='approval_status'),
 
     # Dashboard URLs - Note the admin dashboard URL is now before django-admin
     path('dashboard/', accounts_views.student_dashboard, name='student_dashboard'),
     path('supervisor/dashboard/', accounts_views.supervisor_dashboard, name='supervisor_dashboard'),
     path('director/dashboard/', accounts_views.director_dashboard, name='director_dashboard'),
+    
+
     
     # Timesheet management URLs
     path('timesheet/submit/', accounts_views.submit_timesheet, name='submit_timesheet'),

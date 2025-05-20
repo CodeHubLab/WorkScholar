@@ -67,6 +67,44 @@ def login_view(request):
     return response
 
 @never_cache
+@login_required
+@user_type_required(['student_working'])
+def approval_status(request):
+    if not request.user.is_authenticated:
+        messages.error(request, 'Please login first')
+        return redirect('login')
+    
+    user = request.user
+    
+    # Get active assignments and their status
+    active_assignments = WorkAssignment.objects.filter(
+        student=user,
+        is_active=True
+    ).select_related('supervisor')
+    
+    # Get all timesheets and their status
+    timesheets = TimeSheet.objects.filter(
+        student=user
+    ).order_by('-date')
+    
+    context = {
+        'active_assignments': active_assignments,
+        'timesheets': timesheets,
+        'total_pending': TimeSheet.objects.filter(
+            student=user,
+            approved=False
+        ).count(),
+        'total_approved': TimeSheet.objects.filter(
+            student=user,
+            approved=True
+        ).count()
+    }
+    
+    response = render(request, 'approval_status.html', context)
+    add_never_cache_headers(response)
+    return response
+
+@never_cache
 def custom_logout(request):
     if request.user.is_authenticated:
         messages.success(request, 'You have been successfully logged out.')

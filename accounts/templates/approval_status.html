@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Scholar Application Status</title>
+    {% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/approval/approvalstatus.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e4b6e;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+        }
+
+        .status-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .profile-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .status-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .status-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-approved {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success-color);
+        }
+
+        .status-declined {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger-color);
+        }
+
+        .status-pending {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning-color);
+        }
+
+        .notification-badge {
+            position: relative;
+            display: inline-block;
+        }
+
+        .notification-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--light-gray);
+        }
+    </style>
+</head>
+<body>
+    <div class="status-container">
+        <div class="status-header">
+            <div class="profile-section">
+                <img src="img/profile pic.jpg" alt="Profile" class="profile-image">
+                <div>
+                    <h4 class="mb-0">Application Status</h4>
+                    <small class="text-muted">Work Scholar Program</small>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="notification-badge">
+                    <button class="btn btn-light" id="notificationBtn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">2</span>
+                    </button>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                        <li><a class="dropdown-item" href="student_dashboard.html">Profile</a></li>
+                        <li><a class="dropdown-item" href="D:\wsbackup\WORKSCHOLAR\login.html">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <ul class="status-list">
+            <li class="status-item">
+                <div>
+                    <h5 class="mb-1">College Department Chair</h5>
+                    <small class="text-muted">Academic Approval</small>
+                </div>
+                <span class="status-badge status-approved">Approved</span>
+            </li>
+            <li class="status-item">
+                <div>
+                    <h5 class="mb-1">Work Supervisor</h5>
+                    <small class="text-muted">Performance Evaluation</small>
+                </div>
+                <span class="status-badge status-pending">Pending</span>
+            </li>
+            <li class="status-item">
+                <div>
+                    <h5 class="mb-1">Student Convocation Head</h5>
+                    <small class="text-muted">Attendance Verification</small>
+                </div>
+                <span class="status-badge status-approved">Approved</span>
+            </li>
+            <li class="status-item">
+                <div>
+                    <h5 class="mb-1">Department of Student Finance</h5>
+                    <small class="text-muted">Financial Clearance</small>
+                </div>
+                <span class="status-badge status-declined">Declined</span>
+            </li>
+            <li class="status-item">
+                <div>
+                    <h5 class="mb-1">Guidance - Psychological Test</h5>
+                    <small class="text-muted">Assessment Results</small>
+                </div>
+                <span class="status-badge status-pending">Pending</span>
+            </li>
+        </ul>
+
+        <div class="action-buttons">
+            <button class="btn btn-secondary" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i> Back
+                <a href="student_dashboard.html"></a>
+            </button>
+            <button class="btn btn-primary" onclick="refreshStatus()">
+                <i class="fas fa-sync-alt"></i> Refresh Status
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="headerwslp/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script>
+    <script>
+        // Initialize Bootstrap components
+        document.addEventListener('DOMContentLoaded', function() {
+            var dropdowns = document.querySelectorAll('.dropdown-toggle');
+            dropdowns.forEach(dropdown => {
+                new bootstrap.Dropdown(dropdown);
+            });
+        });
+
+        // Notification System
+        function showNotification(message, type = 'info') {
+            const toastContainer = document.querySelector('.toast-container');
+            const toastHtml = `
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">Status Update</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                </div>
+            `;
+            toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+            const toast = toastContainer.lastElementChild;
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+
+            // Remove toast after it's hidden
+            toast.addEventListener('hidden.bs.toast', () => {
+                toast.remove();
+            });
+        }
+
+        // Notification Button Click Handler
+        document.getElementById('notificationBtn').addEventListener('click', () => {
+            showNotification('You have 2 pending approvals to check');
+        });
+
+        // Refresh Status Function
+        function refreshStatus() {
+            showNotification('Refreshing approval status...', 'info');
+            // Here you would typically make an API call to get the latest status
+            // For demo purposes, we'll just show a notification
+            setTimeout(() => {
+                showNotification('Status updated successfully!', 'success');
+            }, 1000);
+        }
+
+        // Example of push notification setup
+        if ('Notification' in window) {
+            Notification.requestPermission().then(function(permission) {
+                if (permission === 'granted') {
+                    // You can now show push notifications
+                    console.log('Push notifications enabled');
+                }
+            });
+        }
+
+        // Function to handle status updates (demo)
+        function updateStatus(itemIndex, newStatus) {
+            const statusItems = document.querySelectorAll('.status-item');
+            const statusBadge = statusItems[itemIndex].querySelector('.status-badge');
+            
+            statusBadge.className = 'status-badge status-' + newStatus.toLowerCase();
+            statusBadge.textContent = newStatus;
+            
+            showNotification(`Status updated to ${newStatus}`, 'success');
+        }
+    </script>
+</body>
+</html>
