@@ -581,3 +581,33 @@ def add_user(request):
     response = render(request, 'add_user.html', context)
     add_never_cache_headers(response)
     return response
+
+@login_required
+@user_type_required(['admin'])
+def approval_dashboard(request):
+    # Logic for admin approval dashboard
+    return render(request, 'approval_dashboard.html')
+
+@login_required
+@user_type_required(['admin'])
+def wsaform(request):
+    # Logic for admin WSA form
+    return render(request, 'wsaform.html')
+
+@login_required
+@user_type_required(['manager'])
+def approval_dashboard_manager(request):
+    # Logic for manager approval dashboard
+    return render(request, 'approval_dashboard.html')
+
+@login_required
+@user_type_required(['manager'])
+def approval_status_manager(request):
+    # Logic for manager approval status
+    return render(request, 'approval_status.html')
+
+@login_required
+@user_type_required(['manager'])
+def wsaform_manager(request):
+    # Logic for manager WSA form
+    return render(request, 'wsaform.html')

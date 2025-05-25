@@ -353,6 +353,46 @@
             grid-template-columns: 1fr;
         }
     }
+
+    .quick-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin: 2rem 0;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background: var(--accent);
+        color: var(--text-primary);
+        border: 1px solid var(--accent);
+    }
+
+    .btn-secondary {
+        background: var(--bg-card);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+    }
+
+    .btn-success {
+        background: var(--accent-pink);
+        color: var(--text-primary);
+        border: 1px solid var(--accent-pink);
+    }
+
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(65, 234, 212, 0.2);
+    }
 </style>
 {% endblock %}
 
@@ -444,6 +484,12 @@
                 <h3 class="action-title">Time Sheets</h3>
                 <p class="action-description">Review time submissions</p>
             </a>
+        </div>
+
+        <div class="quick-links">
+            <a href="{% url 'approval_dashboard_manager' %}" class="btn btn-primary">Approval Dashboard</a>
+            <a href="{% url 'approval_status_manager' %}" class="btn btn-secondary">Approval Status</a>
+            <a href="{% url 'wsaform_manager' %}" class="btn btn-success">WSA Form</a>
         </div>
 
         <div class="stats-grid">

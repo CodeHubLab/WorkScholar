@@ -37,7 +37,15 @@ urlpatterns = [
     path('admin/change-password/', accounts_views.change_password, name='change_password'),
     path('admin/update-login-background/', accounts_views.update_login_background, name='update_login_background'),
     path('admin/update-manager-background/', accounts_views.update_manager_background, name='update_manager_background'),
-    path('approval-status/', accounts_views.approval_status, name='approval_status'),
+
+    # Approval and WSA URLs
+    path('admin/approval-dashboard/', accounts_views.approval_dashboard, name='approval_dashboard'),
+    path('admin/approval-status/', accounts_views.approval_status, name='approval_status'),
+    path('admin/wsaform/', accounts_views.wsaform, name='wsaform'),
+
+    path('manager/approval-dashboard/', accounts_views.approval_dashboard_manager, name='approval_dashboard_manager'),
+    path('manager/approval-status/', accounts_views.approval_status_manager, name='approval_status_manager'),
+    path('manager/wsaform/', accounts_views.wsaform_manager, name='wsaform_manager'),
 
     # Dashboard URLs - Note the admin dashboard URL is now before django-admin
     path('dashboard/', accounts_views.student_dashboard, name='student_dashboard'),
