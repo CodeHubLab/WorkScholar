@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="x-icon" href="img\WSNEWLOGO (1).png">
     <title>Work Scholar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -12,6 +13,35 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Back Button Styles */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-3px);
+        }
+
+        .back-btn i {
+            font-size: 16px;
         }
         
         :root {
@@ -25,12 +55,9 @@
         }
         
         body {
-            {% if login_background %}
-            background: url('{{ login_background.image.url }}') no-repeat center center fixed;
-            background-size: cover;
-            {% else %}
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            {% endif %}
+            
+            background: linear-gradient(135deg, #d8ebff, #7fd3f5);
+    
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -47,6 +74,7 @@
             max-width: 400px;
             padding: 40px;
             margin: 40px 0;
+            position: relative;
         }
         
         .login-header {
@@ -191,8 +219,14 @@
             width: 100%;
             background-color: #2c2c54;
             color: var(--white);
-            padding: 15px 0;
-            margin-top: auto;
+            border-radius: 20px;
+            padding: 11PX 0px;
+            position: relative;
+            margin-top: 50px;
+            margin-left: 10px;
+            margin-right: 10px;
+            display: flex;
+            flex-direction: column;
             transition: all 0.3s ease;
         }
         
@@ -573,20 +607,73 @@
                 padding: 8px;
                 font-size: 10px;
             }
+            .logo-image {
+                width: 20px;
+                height: 5px;
+                background-image: url('img/WSNEWLOGO (1).jpg');
+                background-size: 100% 100%;
+                background-position: center;
+                background-repeat: no-repeat;
+            }   
         }
+        link[rel="shortcut icon"] {
+  width: 16px;  /* Standard favicon size */
+  height: 16px; /* Standard favicon size */
+}
+
+        /* Back Button Styles */
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: var(--white);
+            color: var(--text-medium);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+            color: var(--primary-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .back-btn i {
+            font-size: 1.2em;
+        }
+
+        /* Mobile responsiveness for back button */
+        @media (max-width: 768px) {
+            .back-btn {
+                top: 15px;
+                left: 15px;
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+        }
+
     </style>
 </head>
 <body>
 
+   
 
     <!-- Rest of the HTML content remains the same -->
     <div class="login-container">
         <div class="login-header">
-            <div class="logo">
-                <i class="fas fa-graduation-cap"></i>
+            <div class="logo-image">              
+                 <img src="img\WSNEWLOGO (1).png" alt="Company Logo">
             </div>
             <h1>Work Scholar</h1>
-            <p>Access your student work portal</p>
+           <!-- <p>Access your student work portal</p> -->
         </div>
         
         <form id="login-form" method="POST" action="{% url 'login' %}">
@@ -619,12 +706,16 @@
                 <a href="{% url 'password_reset' %}">Forgot Password?</a>
             </div>
         </form>
+
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back
+        </a>
     </div>
 
-    <!-- Login Footer -->
+    <!-- Login Footer 
     <footer class="footer footer-collapsed" id="siteFooter">
         <div class="footer-container">
-            <!-- Mobile footer toggle button -->
+             Mobile footer toggle button 
             <button class="footer-toggle" id="footerToggle">
                 More Info <i class="fas fa-chevron-down"></i>
             </button>
@@ -669,10 +760,11 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
         
         <div class="footer-bottom">
             <p>&copy; 2025 Work Scholar. All rights reserved.</p>
+            <p>Credit: Hendrix Brent Fortu & Jamleck Arzola</p>
         </div>
     </footer>
 
@@ -690,6 +782,20 @@
                 }, 3000);
             }
         });
+
+            // Footer toggle functionality for mobile
+        document.getElementById('footerToggle').addEventListener('click', function() {
+            const footer = document.getElementById('siteFooter');
+            
+            if (footer.classList.contains('footer-collapsed')) {
+                footer.classList.remove('footer-collapsed');
+                footer.classList.add('footer-expanded');
+            } else {
+                footer.classList.remove('footer-expanded');
+                footer.classList.add('footer-collapsed');
+            }
+        });
+
     </script>
 </body>
 </html>
