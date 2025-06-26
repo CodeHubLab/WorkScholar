@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Telephone Directory</title>
+   <style>
+  body {
+    position: relative;
+    font-family: Arial, sans-serif;
+    background: none;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    background-image: url('C:/Users/ICTS-TECH-TEST2/Pictures/download.jfif'); /* Update path as needed */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(10px) brightness(0.5);
+    }
+
+    h1 {
+      text-align: center;
+      color: #f8f2f2;
+    }
+
+    .controls {
+      max-width: 600px;
+      margin: 0 auto 20px auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .controls input, .controls button {
+      padding: 8px;
+      font-size: 1em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #3700ff;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .delete-btn {
+      background: #ff4d4d;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .delete-btn:hover {
+      background: #c40000;
+    }
+
+    @media (max-width: 600px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      th {
+        display: none;
+      }
+      td {
+        position: relative;
+        padding-left: 50%;
+      }
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        font-weight: bold;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Telephone Directory</h1>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search by name, phone, or email" onkeyup="searchTable()" />
+  </div>
+
+  <div class="controls">
+    <input type="text" id="nameInput" placeholder="Name" />
+    <input type="text" id="phoneInput" placeholder="Phone Number" />
+    <input type="email" id="emailInput" placeholder="Email" />
+    <button onclick="addEntry()">Add Entry</button>
+  </div>
+
+  <table id="directoryTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Name">Wince Butbut</td>
+        <td data-label="Phone Number">(123) 456-7890</td>
+        <td data-label="Email">wince@example.com</td>
+        <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+      </tr>
+      <tr>
+        <td data-label="Name">Jane Smith</td>
+        <td data-label="Phone Number">(987) 654-3210</td>
+        <td data-label="Email">jane@example.com</td>
+        <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+      </tr>
+      <tr>
+        <td data-label="Name">Hendrix</td>
+        <td data-label="Phone Number">(555) 123-4567</td>
+        <td data-label="Email">GAY@example.com</td>
+        <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+      </tr>
+     <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+
+  <script>
+    function searchTable() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const table = document.getElementById('directoryTable');
+      const trs = table.getElementsByTagName('tr');
+      for (let i = 1; i < trs.length; i++) {
+        const tds = trs[i].getElementsByTagName('td');
+        let found = false;
+        for (let j = 0; j < 3; j++) {
+          if (tds[j] && tds[j].textContent.toLowerCase().includes(input)) {
+            found = true;
+            break;
+          }
+        }
+        trs[i].style.display = found ? '' : 'none';
+      }
+    }
+
+    function addEntry() {
+      const name = document.getElementById('nameInput').value.trim();
+      const phone = document.getElementById('phoneInput').value.trim();
+      const email = document.getElementById('emailInput').value.trim();
+      if (!name || !phone || !email) {
+        alert('Please fill in all fields.');
+        return;
+      }
+      const table = document.getElementById('directoryTable').getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow();
+      newRow.innerHTML = `
+        <td data-label="Name">${name}</td>
+        <td data-label="Phone Number">${phone}</td>
+        <td data-label="Email">${email}</td>
+        <td><button class="delete-btn" onclick="deleteRow(this)">Delete</button></td>
+      `;
+      document.getElementById('nameInput').value = '';
+      document.getElementById('phoneInput').value = '';
+      document.getElementById('emailInput').value = '';
+    }
+
+    function deleteRow(btn) {
+      if (confirm('Are you sure you want to delete this entry?')) {
+        const row = btn.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+      }
+    }
+  </script>
+
+</body>
+</html>
